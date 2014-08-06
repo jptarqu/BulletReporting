@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script src="~/Scripts/knockout-3.1.0.debug.js"></script>
+<script src="~/Scripts/IDE/Utils.js"></script>
+<script src="~/Scripts/IDE/IScope.js"></script>
+<script src="~/Scripts/IDE/CodeBlock.js"></script>
+<script src="~/Scripts/IDE/Contracts/IContract.js"></script>
+<script src="~/Scripts/IDE/Contracts/DatasetContract.js"></script>
+<script src="~/Scripts/IDE/Expressions/DateExpression.js"></script>
+<script src="~/Scripts/IDE/Expressions/FieldExpression.js"></script>
+<script src="~/Scripts/IDE/Expressions/NumberExpression.js"></script>
+<script src="~/Scripts/IDE/Expressions/OperatorExpression.js"></script>
+<script src="~/Scripts/IDE/Expressions/TextExpression.js"></script>
+<script src="~/Scripts/IDE/Functions/IFunction.js"></script>
+<script src="~/Scripts/IDE/Functions/FilterFunction.js"></script>
+<script src="~/Scripts/IDE/Params/IParam.js"></script>
+<script src="~/Scripts/IDE/Params/DataSetParam.js"></script>
+
+<script src="~/Scripts/IDE/Steps/Step.js"></script>
+<script src="~/Scripts/IDE/Steps/IDatasetValueStep.js"></script>
+<script src="~/Scripts/IDE/Steps/IDependsOnSteps.js"></script>
+<script src="~/Scripts/IDE/Steps/ISingleValueStep.js"></script>
+<script src="~/Scripts/IDE/Steps/CallFilterFunctionStep.js"></script>
+<script src="~/Scripts/IDE/Steps/DateStep.js"></script>
+<script src="~/Scripts/IDE/Steps/FieldStep.js"></script>
+<script src="~/Scripts/IDE/Steps/NumberStep.js"></script>
+<script src="~/Scripts/IDE/Steps/OperatorStep.js"></script>
+<script src="~/Scripts/IDE/Steps/TableLoadStep.js"></script>
+<script src="~/Scripts/IDE/Steps/TextStep.js"></script>
+
+<div class="jumbotron">
+
+</div>
+
+<div data-bind="foreach: UserSteps" class="row">
+    <input data-bind="value: StepName" />
+</div>
+
+<script>
+
+    $(function () {
+        var code_block = new IDE.CodeBlock();
+        code_block.Test();
+    });
+
+
+</script>
