@@ -12,14 +12,14 @@ module IDE {
                     "ChildFunctions":
                     [
                         {
-                            "TypeName": "FilterFunction", "DatasetContract":
+                            "TypeName": "IDE.Functions.FilterFunction", "DatasetContract":
                             {
                                 "FieldsRequired":
                                 ["Account Number", "Tran Amount"
                                 ]
                             }, "FunctionName": "GetAboveOffset", "FunctionParams":
                             [
-                                { "ParamName": "Offset" }
+                                { "TypeName" : "IDE.Params.DataSetParam", "ParamName": "Offset" }
                             ], "UserSteps":
                             [
                                 {
@@ -58,7 +58,7 @@ module IDE {
                     ]
                 } ;
             this.LoadDataFromJSON(
-                testdata["UserSteps"], testdata["ChildFunctions"]
+                testdata
 
             //    [
             //    { StepTypeName: "TableLoadStep", StepName: "Step 1", Name: "Transactions", FieldNames: ["Account Number", "Tran Amount"] },
@@ -120,34 +120,35 @@ module IDE {
 
 
 		}
-        LoadDataFromJSON(json_steps: Array<any>, json_functions: Array<any>): void {
+        LoadDataFromJSON(json_data: any): void {
             var self: CodeBlock = this;
-            for (var func_idx = 0; func_idx < json_functions.length; func_idx++) {
-                var entry = json_functions[func_idx];
+            Utils.CopyPropertiesToKO(json_data, self);
+            //for (var func_idx = 0; func_idx < json_functions.length; func_idx++) {
+            //    var entry = json_functions[func_idx];
 
-                var new_func: Functions.IFunction = null;
-                if (entry.FunctionTypeName == "FilterFunction") {
-                    var new_filter_func = new Functions.FilterFunction();
-                    new_filter_func.LoadDataFromJSON(entry);
-                    new_func = new_filter_func;
-                }
-                self.ChildFunctions.push(new_func);
-            }
+            //    var new_func: Functions.IFunction = null;
+            //    if (entry.FunctionTypeName == "FilterFunction") {
+            //        var new_filter_func = new Functions.FilterFunction();
+            //        new_filter_func.LoadDataFromJSON(entry);
+            //        new_func = new_filter_func;
+            //    }
+            //    self.ChildFunctions.push(new_func);
+            //}
 
-            Utils.CopyPropertiesToKO(json_steps, this);
-            for (var step_idx = 0; step_idx < json_steps.length; step_idx++)
-            {
-                var entry = json_steps[step_idx];
-                console.log(entry);
-                var new_step:Steps.IStep = null;
-                if (entry.StepTypeName == "TableLoadStep")
-                {
-                    var new_table = new Steps.TableLoadStep();
-                    new_table.LoadDataFromJSON(entry);
-                    new_step = new_table;
-                }
-                self.UserSteps.push(new_step);
-            }
+            //Utils.CopyPropertiesToKO(json_steps, this);
+            //for (var step_idx = 0; step_idx < json_steps.length; step_idx++)
+            //{
+            //    var entry = json_steps[step_idx];
+            //    console.log(entry);
+            //    var new_step:Steps.IStep = null;
+            //    if (entry.StepTypeName == "TableLoadStep")
+            //    {
+            //        var new_table = new Steps.TableLoadStep();
+            //        new_table.LoadDataFromJSON(entry);
+            //        new_step = new_table;
+            //    }
+            //    self.UserSteps.push(new_step);
+            //}
 
         }
 

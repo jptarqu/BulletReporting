@@ -14,8 +14,13 @@
                         for (var item_idx = 0; item_idx < items.length; item_idx++) {
                             var source_item = items[item_idx];
                             var type_name = source_item["TypeName"];
-                            var new_item = this.Factories[type_name]();
-                            this.CopyPropertiesToKO(source_item, new_item);
+                            var new_item;
+                            if (type_name !== undefined) {
+                                new_item = this.Factories[type_name]();
+                                this.CopyPropertiesToKO(source_item, new_item);
+                            } else {
+                                new_item = source_item;
+                            }
                             observable_array.push(new_item);
                         }
                     } else if (source[prop]["TypeName"] !== undefined) {

@@ -4,7 +4,7 @@ var IDE;
     (function (Steps) {
         var NumberStep = (function () {
             function NumberStep() {
-                this.StepTypeName = "NumberStep";
+                this.TypeName = "IDE.Steps.NumberStep";
                 this.StepName = ko.observable("");
                 this.Value = ko.observable(0);
             }
