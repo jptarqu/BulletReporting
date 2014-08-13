@@ -1,10 +1,11 @@
 ﻿/// <reference path="../typings/knockout/knockout.d.ts" />
 
 module IDE {
-    export class CodeBlock implements IScope {
+    export class DataExtractionFunction implements IScope {
 		
 		ChildFunctions = ko.observableArray<Functions.IFunction>();
-        UserSteps = ko.observableArray<Steps.IStep>();
+        UserSteps = ko.observableArray<Steps.DatasetValueStep>(); //only DatasetValueStep and static value steps can be used from DataExtractionFunctions
+        AvailableSingleValueStepNames = ko.observableArray<string>();
 
         Test(): void {
             var testdata =
@@ -41,10 +42,10 @@ module IDE {
                             [
                             ]
                         },
-                        { "StepTypeName": "NumberStep", "StepName": "tax", "Value": 5 },
-                        { "StepTypeName": "NumberStep", "StepName": "penalty", "Value": 6 },
+                        { "TypeName": "IDE.Steps.NumberStep", "StepName": "tax", "Value": 5 },
+                        { "TypeName": "IDE.Steps.NumberStep", "StepName": "penalty", "Value": 6 },
                         {
-                            "TypeName": "IDE.Steps.OperatorStep", "StepTypeName": "OperatorStep", "StepName": "MyOffset", "Operator": "+", "OperandVarNames":
+                            "TypeName": "IDE.Steps.OperatorStep", "StepName": "MyOffset", "Operator": "+", "OperandVarNames":
                             ["tax", "penalty"
                             ]
                         },
@@ -90,7 +91,7 @@ module IDE {
             this.UserSteps.push(new_op);
 
             //define (not call) the filter function
-            var new_func = new Functions.FilterFunction();
+            var new_func = new Functions.FunctionFromDataset();
             new_func.TypeName = "FilterFunction";
             new_func.FunctionName("GetAboveOffset");
             var new_contract = new Contracts.DatasetContract();
@@ -121,7 +122,7 @@ module IDE {
 
 		}
         LoadDataFromJSON(json_data: any): void {
-            var self: CodeBlock = this;
+            var self: DataExtractionFunction = this;
             Utils.CopyPropertiesToKO(json_data, self);
             //for (var func_idx = 0; func_idx < json_functions.length; func_idx++) {
             //    var entry = json_functions[func_idx];
@@ -164,6 +165,46 @@ module IDE {
             return json_data;
         }
 
+        RefreshAvailableSingleValueStepNames(calling_step: IDE.Steps.IStep): void {
+            this.AvailableSingleValueStepNames.removeAll();
+            var db_fields = this.GetPreviousDatasetFieldNames(calling_step);
+            var var_fields = this.GetSingleValueNames(calling_step);
+            this.AvailableSingleValueStepNames( db_fields.concat(var_fields) );
+        }
+
+        GetSingleValueNames(calling_step: IDE.Steps.IStep): Array<string> {
+           
+            var steps = this.UserSteps();
+            var field_names: Array<string> = [];
+
+            for (var step_idx = 0; step_idx < steps.length; step_idx++) {
+                if (steps[step_idx] == calling_step) {
+                    //reached the callinmg step, shoud not go futher into future steps
+                    break;
+                }
+                if (steps[step_idx] instanceof  Steps.SingleValueStep) {
+                    field_names.push((<Steps.SingleValueStep> steps[step_idx]).StepName());
+                }
+            }
+            return field_names;
+        }
+
+        GetPreviousDatasetFieldNames(calling_step: IDE.Steps.IStep): Array<string> {
+            //find the calling step
+            var steps = this.UserSteps();
+            var field_names: Array<string> = [];
+
+            for (var step_idx = 0; step_idx < steps.length; step_idx++) {
+                if (steps[step_idx] == calling_step) {
+                    //reached the callinmg step, shoud not go futher into future steps
+                    break;
+                }
+                if (steps[step_idx] instanceof Steps.DatasetValueStep ) {
+                    field_names.concat((<Steps.IDatasetValueStep> steps[step_idx]).FieldNames());
+                }
+            }
+            return field_names;
+        }
 
         //We will opass this function to the child steps so that they can call it to request the names of fields of steps before them
         GetDatasetFieldNames(calling_step: IDE.Steps.IStep, dataset_name: string): Array<string> {

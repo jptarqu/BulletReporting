@@ -5,7 +5,6 @@ var IDE;
         var DateStep = (function () {
             function DateStep() {
                 this.TypeName = "IDE.Steps.DateStep";
-                this.StepTypeName = "DateStep";
                 this.StepName = ko.observable("");
                 this.Year = ko.observable();
                 this.Month = ko.observable();

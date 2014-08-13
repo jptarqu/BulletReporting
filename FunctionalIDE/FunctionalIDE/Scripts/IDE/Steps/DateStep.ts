@@ -4,7 +4,6 @@ module IDE.Steps {
     
     export class DateStep implements IStep, ISingleValueStep {
         TypeName: string = "IDE.Steps.DateStep";
-        StepTypeName = "DateStep";
         StepName = ko.observable<string>("");
         Year = ko.observable<Number>();
         Month = ko.observable<Number>();

@@ -1,0 +1,18 @@
+﻿
+<script id="IDE.Steps.OperatorStep" type="text/html">
+    <div class="operator-step exp">
+        <div data-bind="foreach: OperandVarNames ">
+            <div class="operator" data-bind="if: $index() > 0 ">
+                <div>
+                    <input type="text" data-bind="value: $parent.Operator" />
+                </div>
+            </div>
+            <div class="operand">
+                <select data-bind="click: $parent.RefreshAvailableSingleValueStepNames, options: $parent.AvailableSingleValueStepNames"></select>
+                
+            </div>
+        </div>
+    </div>
+</script>
+<script id="OperatorStepDisplay" type="text/html">
+</script>

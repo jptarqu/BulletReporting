@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
 
 module IDE.Functions {
-    export class FilterFunction implements IFunction, IScope  {
+    export class FunctionFromDataset implements IFunction, IScope  {
         TypeName = "IDE.Functions.FilterFunction";
         DatasetContract = ko.observable<IDE.Contracts.DatasetContract>();
         FunctionName = ko.observable<string>("");

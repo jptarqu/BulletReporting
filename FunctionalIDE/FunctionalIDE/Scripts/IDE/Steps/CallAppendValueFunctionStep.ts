@@ -1,8 +1,8 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
 
 module IDE.Steps {
-    export class CallFilterFunctionStep extends DatasetValueStep {
-        TypeName: string = "IDE.Steps.CallFilterFunctionStep";
+    export class CallAppendValueFunctionStep extends DatasetValueStep {
+        TypeName: string = "IDE.Steps.CallAppendValueFunctionStep";
 
         FunctionName = ko.observable<string>();
         DatasetName = ko.observable<string>(); 

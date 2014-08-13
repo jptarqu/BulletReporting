@@ -1,0 +1,42 @@
+﻿
+<script id="FunctionExpression" type="text/html">
+     
+
+    <div class="function-exp exp" data-bind="css: { exp_selected: Selected() == true }">
+        <div>Function Name: <select data-bind="options: $root.AvailableFunctions, optionsText: 'Name', value: QueryFunction"></select>
+
+        </div>
+        <p>Parameters:</p>
+        <div data-bind="foreach: Params ">
+            <div data-bind="if: $index() > 0 ">
+                ,
+            </div>
+            <div class="parameter" >
+                <div data-bind="template: { name: ExpressionType }">
+                </div>
+                <button data-bind="click: $parent.RemoveExpression">Remove</button>
+            </div>
+        </div>
+        <button data-bind="click: function (data, event) { $root.SelectForEdit(data, $parent) }">Select</button>
+
+    </div>
+</script>
+<script id="FunctionExpressionDisplay" type="text/html">
+
+    <span>( 
+            <!-- ko if: QueryFunction() != null -->
+            <span data-bind="text: QueryFunction().Name"></span>
+            (
+            <span data-bind="foreach: Params ">
+                <!-- ko if: $index() < $parent.QueryFunction().NumParams -->
+                    <!-- ko if: $index() > 0  -->
+                    ,
+                    <!-- /ko -->
+                    <span data-bind="template: { name: ExpressionType + 'Display' }"></span>
+                <!-- /ko -->
+            </span>
+            )
+            <!-- /ko -->
+        )
+    </span>
+</script>

@@ -6,7 +6,7 @@ var IDE;
             function FieldStep() {
                 this.TypeName = "IDE.Steps.FieldStep";
                 this.StepName = ko.observable("");
-                this.FieldName = ko.observable();
+                this.FieldName = ko.observable("");
             }
             FieldStep.prototype.LoadDataFromJSON = function (source) {
                 // a utility that copies properties into this instance

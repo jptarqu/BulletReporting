@@ -1,6 +1,8 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<link href="~/Content/IDE.css" rel="stylesheet" />
+
 <script src="~/Scripts/jquery-2.1.1.min.js"></script>
 <script src="~/Scripts/knockout-3.1.0.debug.js"></script>
 <script src="~/Scripts/IDE/Utils.js"></script>
@@ -19,6 +21,8 @@
 <script src="~/Scripts/IDE/Params/DataSetParam.js"></script>
 
 <script src="~/Scripts/IDE/Steps/Step.js"></script>
+<script src="~/Scripts/IDE/Steps/SingleValueStep.js"></script>
+<script src="~/Scripts/IDE/Steps/DatasetValueStep.js"></script>
 <script src="~/Scripts/IDE/Steps/IDatasetValueStep.js"></script>
 <script src="~/Scripts/IDE/Steps/IDependsOnSteps.js"></script>
 <script src="~/Scripts/IDE/Steps/ISingleValueStep.js"></script>
@@ -30,12 +34,22 @@
 <script src="~/Scripts/IDE/Steps/TableLoadStep.js"></script>
 <script src="~/Scripts/IDE/Steps/TextStep.js"></script>
 
+<!-- Teamplates -->
+@Html.Partial("~/Views/Shared/Steps/CallFilterFunctionStep.cshtml")
+@Html.Partial("~/Views/Shared/Steps/DateStep.cshtml")
+@Html.Partial("~/Views/Shared/Steps/FunctionExpression.cshtml")
+@Html.Partial("~/Views/Shared/Steps/NumberStep.cshtml")
+@Html.Partial("~/Views/Shared/Steps/OperatorStep.cshtml")
+@Html.Partial("~/Views/Shared/Steps/TableLoadStep.cshtml")
+
+
 <div class="jumbotron">
 
 </div>
 
 <div data-bind="foreach: UserSteps" class="row">
-    <input data-bind="value: StepName" />
+    <div data-bind="template: { name: TypeName }">
+    </div>
 </div>
 
 <script>

@@ -3,9 +3,8 @@
 module IDE.Steps {
     export class OperatorStep implements IStep, ISingleValueStep, IDependsOnSteps {
         TypeName: string = "IDE.Steps.OperatorStep";
-        StepTypeName = "OperatorStep";
         StepName = ko.observable<string>("");
-        Operator = ko.observable<String>();
+        Operator = ko.observable<string>();
         OperandVarNames = ko.observableArray<String>(); //Important! we just want the name of the step or param
 
 		UpdateStepName(old_name: string, new_name: string): void

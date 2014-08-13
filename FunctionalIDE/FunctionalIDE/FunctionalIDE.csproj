@@ -123,12 +123,22 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\IDE.css">
+      <DependentUpon>IDE.less</DependentUpon>
+    </Content>
+    <Content Include="Content\IDE.min.css">
+      <DependentUpon>IDE.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\IDE.less" />
+    <Content Include="Content\IDE.css.map">
+      <DependentUpon>IDE.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -160,6 +170,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Steps\FunctionExpression.cshtml" />
+    <Content Include="Views\Shared\Steps\NumberStep.cshtml" />
+    <Content Include="Views\Shared\Steps\TableLoadStep.cshtml" />
+    <Content Include="Views\Shared\Steps\CallFilterFunctionStep.cshtml" />
+    <Content Include="Views\Shared\Steps\DateStep.cshtml" />
+    <Content Include="Views\Shared\Steps\OperatorStep.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -173,7 +189,7 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\IDE\CodeBlock.ts" />
+    <TypeScriptCompile Include="Scripts\IDE\DataExtractionFunction.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Contracts\DatasetContract.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Contracts\IContract.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Expressions\OperatorExpression.ts" />
@@ -181,14 +197,17 @@
     <TypeScriptCompile Include="Scripts\IDE\Expressions\TextExpression.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Expressions\NumberExpression.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Expressions\FieldExpression.ts" />
-    <TypeScriptCompile Include="Scripts\IDE\Functions\FilterFunction.ts" />
+    <TypeScriptCompile Include="Scripts\IDE\Functions\FunctionFromDataset.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Functions\IFunction.ts" />
     <TypeScriptCompile Include="Scripts\IDE\IScope.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Params\DataSetParam.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Params\IParam.ts" />
+    <TypeScriptCompile Include="Scripts\IDE\Steps\CallAppendValueFunctionStep.ts" />
+    <TypeScriptCompile Include="Scripts\IDE\Steps\DatasetValueStep.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Steps\DateStep.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Steps\FieldStep.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Steps\IDependsOnSteps.ts" />
+    <TypeScriptCompile Include="Scripts\IDE\Steps\SingleValueStep.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Steps\NumberStep.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Steps\OperatorStep.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Steps\Step.ts" />

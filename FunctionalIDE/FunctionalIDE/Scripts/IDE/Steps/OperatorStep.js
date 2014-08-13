@@ -5,7 +5,6 @@ var IDE;
         var OperatorStep = (function () {
             function OperatorStep() {
                 this.TypeName = "IDE.Steps.OperatorStep";
-                this.StepTypeName = "OperatorStep";
                 this.StepName = ko.observable("");
                 this.Operator = ko.observable();
                 this.OperandVarNames = ko.observableArray();

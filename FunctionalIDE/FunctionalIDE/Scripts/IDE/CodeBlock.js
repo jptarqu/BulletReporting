@@ -5,6 +5,7 @@ var IDE;
         function CodeBlock() {
             this.ChildFunctions = ko.observableArray();
             this.UserSteps = ko.observableArray();
+            this.AvailableSingleValueStepNames = ko.observableArray();
         }
         CodeBlock.prototype.Test = function () {
             var testdata = {
@@ -33,10 +34,10 @@ var IDE;
                     {
                         "TypeName": "IDE.Steps.TableLoadStep", "StepName": "Step 2", "Name": "Accts", "FieldNames": []
                     },
-                    { "StepTypeName": "NumberStep", "StepName": "tax", "Value": 5 },
-                    { "StepTypeName": "NumberStep", "StepName": "penalty", "Value": 6 },
+                    { "TypeName": "IDE.Steps.NumberStep", "StepName": "tax", "Value": 5 },
+                    { "TypeName": "IDE.Steps.NumberStep", "StepName": "penalty", "Value": 6 },
                     {
-                        "TypeName": "IDE.Steps.OperatorStep", "StepTypeName": "OperatorStep", "StepName": "MyOffset", "Operator": "+", "OperandVarNames": [
+                        "TypeName": "IDE.Steps.OperatorStep", "StepName": "MyOffset", "Operator": "+", "OperandVarNames": [
                             "tax", "penalty"
                         ]
                     },
@@ -143,6 +144,44 @@ var IDE;
             //    json_data += steps[step_idx].to
             //}
             return json_data;
+        };
+
+        CodeBlock.prototype.RefreshAvailableSingleValueStepNames = function (calling_step) {
+            this.AvailableSingleValueStepNames.removeAll();
+            var db_fields = this.GetPreviousDatasetFieldNames(calling_step);
+            var var_fields = this.GetSingleValueNames(calling_step);
+            this.AvailableSingleValueStepNames(db_fields.concat(var_fields));
+        };
+
+        CodeBlock.prototype.GetSingleValueNames = function (calling_step) {
+            var steps = this.UserSteps();
+            var field_names = [];
+
+            for (var step_idx = 0; step_idx < steps.length; step_idx++) {
+                if (steps[step_idx] == calling_step) {
+                    break;
+                }
+                if (steps[step_idx] instanceof IDE.Steps.SingleValueStep) {
+                    field_names.push(steps[step_idx].StepName());
+                }
+            }
+            return field_names;
+        };
+
+        CodeBlock.prototype.GetPreviousDatasetFieldNames = function (calling_step) {
+            //find the calling step
+            var steps = this.UserSteps();
+            var field_names = [];
+
+            for (var step_idx = 0; step_idx < steps.length; step_idx++) {
+                if (steps[step_idx] == calling_step) {
+                    break;
+                }
+                if (steps[step_idx] instanceof IDE.Steps.DatasetValueStep) {
+                    field_names.concat(steps[step_idx].FieldNames());
+                }
+            }
+            return field_names;
         };
 
         //We will opass this function to the child steps so that they can call it to request the names of fields of steps before them
