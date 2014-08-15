@@ -139,6 +139,7 @@
     <Content Include="Content\IDE.css.map">
       <DependentUpon>IDE.css</DependentUpon>
     </Content>
+    <Content Include="Scripts\IDE\TestData.json" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -192,6 +193,9 @@
     <TypeScriptCompile Include="Scripts\IDE\DataExtractionFunction.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Contracts\DatasetContract.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Contracts\IContract.ts" />
+    <TypeScriptCompile Include="Scripts\IDE\Dialogs\HelpCallback.ts" />
+    <TypeScriptCompile Include="Scripts\IDE\Dialogs\SearchCallback.ts" />
+    <TypeScriptCompile Include="Scripts\IDE\Dialogs\ReferenceDialog.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Expressions\OperatorExpression.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Expressions\DateExpression.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Expressions\TextExpression.ts" />

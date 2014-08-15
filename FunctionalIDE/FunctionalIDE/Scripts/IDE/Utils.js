@@ -36,7 +36,7 @@
         };
         Utils.Factories = {
             "IDE.Functions.FilterFunction": function () {
-                return new IDE.Functions.FilterFunction();
+                return new IDE.Functions.FunctionFromDataset();
             },
             "IDE.Params.DataSetParam": function () {
                 return new IDE.Params.DataSetParam();

@@ -10,85 +10,101 @@ module IDE {
         Test(): void {
             var testdata =
                 {
-                    "ChildFunctions":
-                    [
+                    "ChildFunctions": [
                         {
-                            "TypeName": "IDE.Functions.FilterFunction", "DatasetContract":
-                            {
-                                "FieldsRequired":
-                                ["Account Number", "Tran Amount"
+                            "TypeName": "IDE.Functions.FilterFunction",
+                            "DatasetContract": {
+                                "FieldsRequired": [
+                                    "Account Number",
+                                    "Tran Amount"
                                 ]
-                            }, "FunctionName": "GetAboveOffset", "FunctionParams":
-                            [
-                                { "TypeName" : "IDE.Params.DataSetParam", "ParamName": "Offset" }
-                            ], "UserSteps":
-                            [
+                            },
+                            "FunctionName": "GetAboveOffset",
+                            "FunctionParams": [
                                 {
-                                    "TypeName": "IDE.Steps.OperatorStep", "StepTypeName": "OperatorStep", "StepName": "", "Operator": ">", "OperandVarNames":
-                                    ["Dataset.Tran Amount", "Offset"
+                                    "ParamName": "Offset",
+                                    "TypeName": "IDE.Params.DataSetParam",
+                                    "Fields": []
+                                }
+                            ],
+                            "UserSteps": [
+                                {
+                                    "TypeName": "IDE.Steps.OperatorStep",
+                                    "StepName": "",
+                                    "Operator": ">",
+                                    "OperandVarNames": [
+                                        "Dataset.Tran Amount",
+                                        "Offset"
                                     ]
                                 }
                             ]
                         }
-                    ], "UserSteps":
-                    [
+                    ],
+                    "UserSteps": [
                         {
-                            "TypeName": "IDE.Steps.TableLoadStep", "StepName": "Step 1", "Name": "Transactions", "FieldNames":
-                            ["Account Number", "Tran Amount"
+                            "StepName": "Step 1",
+                            "FieldNames": [
+                                "Account Number",
+                                "Tran Amount"
+                            ],
+                            "TypeName": "IDE.Steps.TableLoadStep",
+                            "Name": "Transactions"
+                        },
+                        {
+                            "StepName": "Step 2",
+                            "FieldNames": [],
+                            "TypeName": "IDE.Steps.TableLoadStep",
+                            "Name": "Accts"
+                        },
+                        {
+                            "StepName": "tax",
+                            "TypeName": "IDE.Steps.NumberStep",
+                            "Value": 5
+                        },
+                        {
+                            "StepName": "penalty",
+                            "TypeName": "IDE.Steps.NumberStep",
+                            "Value": 6
+                        },
+                        {
+                            "TypeName": "IDE.Steps.OperatorStep",
+                            "StepName": "MyOffset",
+                            "Operator": "+",
+                            "OperandVarNames": [
+                                "tax",
+                                "penalty"
                             ]
                         },
                         {
-                            "TypeName": "IDE.Steps.TableLoadStep", "StepName": "Step 2", "Name": "Accts", "FieldNames":
-                            [
-                            ]
-                        },
-                        { "TypeName": "IDE.Steps.NumberStep", "StepName": "tax", "Value": 5 },
-                        { "TypeName": "IDE.Steps.NumberStep", "StepName": "penalty", "Value": 6 },
-                        {
-                            "TypeName": "IDE.Steps.OperatorStep", "StepName": "MyOffset", "Operator": "+", "OperandVarNames":
-                            ["tax", "penalty"
-                            ]
-                        },
-                        {
-                            "TypeName": "IDE.Steps.CallFilterFunctionStep", "StepName": "", "FunctionName": "GetAboveOffset", "DatasetName": "Step 1", "ParamNames":
-                            ["MyOffset"
-                            ], "FieldNames":
-                            ["Account Number", "Tran Amount"
+                            "StepName": "",
+                            "FieldNames": [
+                                "Account Number",
+                                "Tran Amount"
+                            ],
+                            "TypeName": "IDE.Steps.CallFilterFunctionStep",
+                            "FunctionName": "GetAboveOffset",
+                            "DatasetName": "Step 1",
+                            "ParamNames": [
+                                "MyOffset"
                             ]
                         }
-                    ]
+                    ],
+                    "AvailableSingleValueStepNames": []
                 } ;
             this.LoadDataFromJSON(
                 testdata
-
-            //    [
-            //    { StepTypeName: "TableLoadStep", StepName: "Step 1", Name: "Transactions", FieldNames: ["Account Number", "Tran Amount"] },
-            //    { StepTypeName: "TableLoadStep", Name: "Accts", StepName: "Step 2" }
-            //],[]
                 );
+            //this.Test();
             ko.applyBindings(this);
-			//this.CreateFilterTest();
             console.log(this.SaveDataToJSON());
         }
 
         CreateFilterTest(): void {
-		   var new_step:Steps.NumberStep = null;
-		   new_step = new Steps.NumberStep();
-		   new_step.StepName("tax");
-		   new_step.Value(5);
-           this.UserSteps.push(new_step);
-		   
-		   new_step = new Steps.NumberStep();
-		   new_step.StepName("penalty");
-		   new_step.Value(6);
-            this.UserSteps.push(new_step);
-		   
-            var new_op = new Steps.OperatorStep();
-            new_op.StepName("MyOffset");
-		   new_op.Operator("+");
-		   new_op.OperandVarNames.push("tax");
-		   new_op.OperandVarNames.push("penalty");
-            this.UserSteps.push(new_op);
+
+            var load_table = new Steps.TableLoadStep();
+            load_table.StepName("Step 1");
+            load_table.Name("Transactions");
+            load_table.FieldNames(["Account Number", "Tran Amount"]);
 
             //define (not call) the filter function
             var new_func = new Functions.FunctionFromDataset();
@@ -98,10 +114,25 @@ module IDE {
             new_contract.FieldsRequired.push("Account Number");
             new_contract.FieldsRequired.push("Tran Amount");
             new_func.DatasetContract(new_contract);
-            var new_param = new Params.Param();
-            new_param.ParamName("Offset");
-            new_func.FunctionParams.push(new_param);
 
+            var new_step: Steps.NumberStep = null;
+            new_step = new Steps.NumberStep();
+            new_step.StepName("tax");
+            new_step.Value(5);
+            new_func.UserSteps.push(new_step);
+
+            new_step = new Steps.NumberStep();
+            new_step.StepName("penalty");
+            new_step.Value(6);
+            new_func.UserSteps.push(new_step);
+
+            var new_op = new Steps.OperatorStep();
+            new_op.StepName("MyOffset");
+            new_op.Operator("+");
+            new_op.OperandVarNames.push("tax");
+            new_op.OperandVarNames.push("penalty");
+            new_func.UserSteps.push(new_op);
+            
             //add the comparison to the filter function's body
             var new_comp = new Steps.OperatorStep();
             new_comp.Operator(">");

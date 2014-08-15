@@ -1,0 +1,82 @@
+﻿{
+    "ChildFunctions": [
+        {
+            "TypeName": "IDE.Functions.FilterFunction",
+            "DatasetContract": {
+                "FieldsRequired": [
+                    "Account Number",
+                    "Tran Amount"
+                ]
+            },
+            "FunctionName": "GetAboveOffset",
+            "FunctionParams": [
+                {
+                    "ParamName": "Offset",
+                    "TypeName": "IDE.Params.DataSetParam",
+                    "Fields": []
+                }
+            ],
+            "UserSteps": [
+                {
+                    "TypeName": "IDE.Steps.OperatorStep",
+                    "StepName": "",
+                    "Operator": ">",
+                    "OperandVarNames": [
+                        "Dataset.Tran Amount",
+                        "Offset"
+                    ]
+                }
+            ]
+        }
+    ],
+    "UserSteps": [
+        {
+            "StepName": "Step 1",
+            "FieldNames": [
+                "Account Number",
+                "Tran Amount"
+            ],
+            "TypeName": "IDE.Steps.TableLoadStep",
+            "Name": "Transactions"
+        },
+        {
+            "StepName": "Step 2",
+            "FieldNames": [],
+            "TypeName": "IDE.Steps.TableLoadStep",
+            "Name": "Accts"
+        },
+        {
+            "StepName": "tax",
+            "TypeName": "IDE.Steps.NumberStep",
+            "Value": 5
+        },
+        {
+            "StepName": "penalty",
+            "TypeName": "IDE.Steps.NumberStep",
+            "Value": 6
+        },
+        {
+            "TypeName": "IDE.Steps.OperatorStep",
+            "StepName": "MyOffset",
+            "Operator": "+",
+            "OperandVarNames": [
+                "tax",
+                "penalty"
+            ]
+        },
+        {
+            "StepName": "",
+            "FieldNames": [
+                "Account Number",
+                "Tran Amount"
+            ],
+            "TypeName": "IDE.Steps.CallFilterFunctionStep",
+            "FunctionName": "GetAboveOffset",
+            "DatasetName": "Step 1",
+            "ParamNames": [
+                "MyOffset"
+            ]
+        }
+    ],
+    "AvailableSingleValueStepNames": []
+}
