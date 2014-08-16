@@ -254,5 +254,11 @@ module IDE {
             }
             return field_names;
         }
+
+
+        CreateFunctionFromDataset(step: Steps.CallFuncFromSetStep): void {
+            var fields_required = this.GetDatasetFieldNames(step, step.DatasetName);
+            step.FunctionName( Utils.CreateFunctionFromDataset(fields_required));
+        }
     }
 } 

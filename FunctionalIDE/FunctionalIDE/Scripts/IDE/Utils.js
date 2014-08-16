@@ -3,6 +3,18 @@
     var Utils = (function () {
         function Utils() {
         }
+        Utils.CreateFunctionFromDataset = function (data_fields_to_use) {
+            var func = new IDE.Functions.FunctionFromDataset();
+            func.FunctionName("NewFunction");
+
+            var new_contract = new IDE.Contracts.DatasetContract();
+            for (var field_idx = 0; field_idx < data_fields_to_use.length; field_idx++) {
+                new_contract.FieldsRequired.push(data_fields_to_use[field_idx]);
+            }
+            func.DatasetContract(new_contract);
+            return func;
+        };
+
         Utils.CopyPropertiesToKO = function (source, target) {
             for (var prop in source) {
                 //if the property exists in the ViewModel and is an observable, then populate it
@@ -35,7 +47,7 @@
             }
         };
         Utils.Factories = {
-            "IDE.Functions.FilterFunction": function () {
+            "IDE.Functions.FunctionFromDataset": function () {
                 return new IDE.Functions.FunctionFromDataset();
             },
             "IDE.Params.DataSetParam": function () {

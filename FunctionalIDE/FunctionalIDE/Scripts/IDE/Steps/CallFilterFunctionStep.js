@@ -13,8 +13,6 @@ var IDE;
             function CallFilterFunctionStep() {
                 _super.apply(this, arguments);
                 this.TypeName = "IDE.Steps.CallFilterFunctionStep";
-                this.FunctionName = ko.observable();
-                this.DatasetName = ko.observable();
                 this.ParamNames = ko.observableArray();
             }
             //FieldNames = ko.observableArray<string>(); //for filter functions the FieldNames would be the same as the names of the passed dataset
@@ -30,7 +28,7 @@ var IDE;
                 IDE.Utils.CopyPropertiesToKO(source, this);
             };
             return CallFilterFunctionStep;
-        })(Steps.DatasetValueStep);
+        })(Steps.CallFuncFromSetStep);
         Steps.CallFilterFunctionStep = CallFilterFunctionStep;
     })(IDE.Steps || (IDE.Steps = {}));
     var Steps = IDE.Steps;

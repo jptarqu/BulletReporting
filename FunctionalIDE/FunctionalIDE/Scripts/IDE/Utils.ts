@@ -2,7 +2,7 @@
 module IDE {
     export class Utils {
         public static Factories: Object = {
-            "IDE.Functions.FilterFunction": () => { return new IDE.Functions.FunctionFromDataset(); },
+            "IDE.Functions.FunctionFromDataset": () => { return new IDE.Functions.FunctionFromDataset(); },
             "IDE.Params.DataSetParam": () => { return new IDE.Params.DataSetParam(); },
             "IDE.Steps.CallFilterFunctionStep": () => { return new IDE.Steps.CallFilterFunctionStep(); },
             "IDE.Steps.DateStep": () => { return new IDE.Steps.DateStep(); },
@@ -12,6 +12,18 @@ module IDE {
             "IDE.Steps.TableLoadStep": () => { return new IDE.Steps.TableLoadStep(); },
             "IDE.Steps.TextStep": () => { return new IDE.Steps.TextStep(); },
         };
+
+        public static CreateFunctionFromDataset(data_fields_to_use: Array<string>): IDE.Functions.FunctionFromDataset  {
+            var func = new IDE.Functions.FunctionFromDataset();
+            func.FunctionName("NewFunction");
+
+            var new_contract = new Contracts.DatasetContract();
+            for (var field_idx = 0; field_idx < data_fields_to_use.length; field_idx++) {
+                new_contract.FieldsRequired.push(data_fields_to_use[field_idx]);
+            }
+            func.DatasetContract(new_contract);
+            return func;
+        }
 
         public static CopyPropertiesToKO(source: any, target: any): void {
             for (var prop in source) {

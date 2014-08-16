@@ -207,6 +207,7 @@
     <TypeScriptCompile Include="Scripts\IDE\Params\DataSetParam.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Params\IParam.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Steps\CallAppendValueFunctionStep.ts" />
+    <TypeScriptCompile Include="Scripts\IDE\Steps\CallFuncFromSetStep.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Steps\DatasetValueStep.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Steps\DateStep.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Steps\FieldStep.ts" />
