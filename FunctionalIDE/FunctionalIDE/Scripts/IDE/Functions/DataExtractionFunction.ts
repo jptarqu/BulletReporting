@@ -1,6 +1,6 @@
-﻿/// <reference path="../typings/knockout/knockout.d.ts" />
+﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
 
-module IDE {
+module IDE.Functions {
     export class DataExtractionFunction implements IScope {
 		
 		ChildFunctions = ko.observableArray<Functions.IFunction>();
@@ -12,7 +12,7 @@ module IDE {
                 {
                     "ChildFunctions": [
                         {
-                            "TypeName": "IDE.Functions.FilterFunction",
+                            "TypeName": "IDE.Functions.FunctionFromDataset",
                             "DatasetContract": {
                                 "FieldsRequired": [
                                     "Account Number",
@@ -108,7 +108,6 @@ module IDE {
 
             //define (not call) the filter function
             var new_func = new Functions.FunctionFromDataset();
-            new_func.TypeName = "FilterFunction";
             new_func.FunctionName("GetAboveOffset");
             var new_contract = new Contracts.DatasetContract();
             new_contract.FieldsRequired.push("Account Number");
@@ -257,8 +256,9 @@ module IDE {
 
 
         CreateFunctionFromDataset(step: Steps.CallFuncFromSetStep): void {
-            var fields_required = this.GetDatasetFieldNames(step, step.DatasetName);
-            step.FunctionName( Utils.CreateFunctionFromDataset(fields_required));
+            var fields_required = this.GetDatasetFieldNames(step, step.DatasetName());
+            var new_func = Utils.CreateFunctionFromDataset(fields_required);
+            step.FunctionName(new_func.FunctionName() );
         }
     }
 } 

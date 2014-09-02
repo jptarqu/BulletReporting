@@ -2,7 +2,7 @@
 
 module IDE.Functions {
     export class FunctionFromDataset implements IFunction, IScope  {
-        TypeName = "IDE.Functions.FilterFunction";
+        TypeName = "IDE.Functions.FunctionFromDataset";
         DatasetContract = ko.observable<IDE.Contracts.DatasetContract>();
         FunctionName = ko.observable<string>("");
         FunctionParams = ko.observableArray<IDE.Params.Param>();

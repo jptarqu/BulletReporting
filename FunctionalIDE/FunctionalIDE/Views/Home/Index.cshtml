@@ -7,7 +7,6 @@
 <script src="~/Scripts/knockout-3.1.0.debug.js"></script>
 <script src="~/Scripts/IDE/Utils.js"></script>
 <script src="~/Scripts/IDE/IScope.js"></script>
-<script src="~/Scripts/IDE/CodeBlock.js"></script>
 <script src="~/Scripts/IDE/Contracts/IContract.js"></script>
 <script src="~/Scripts/IDE/Contracts/DatasetContract.js"></script>
 <script src="~/Scripts/IDE/Expressions/DateExpression.js"></script>
@@ -16,7 +15,8 @@
 <script src="~/Scripts/IDE/Expressions/OperatorExpression.js"></script>
 <script src="~/Scripts/IDE/Expressions/TextExpression.js"></script>
 <script src="~/Scripts/IDE/Functions/IFunction.js"></script>
-<script src="~/Scripts/IDE/Functions/FilterFunction.js"></script>
+<script src="~/Scripts/IDE/Functions/FunctionFromDataset.js"></script>
+<script src="~/Scripts/IDE/Functions/DataExtractionFunction.js"></script>
 <script src="~/Scripts/IDE/Params/IParam.js"></script>
 <script src="~/Scripts/IDE/Params/DataSetParam.js"></script>
 
@@ -26,6 +26,7 @@
 <script src="~/Scripts/IDE/Steps/IDatasetValueStep.js"></script>
 <script src="~/Scripts/IDE/Steps/IDependsOnSteps.js"></script>
 <script src="~/Scripts/IDE/Steps/ISingleValueStep.js"></script>
+<script src="~/Scripts/IDE/Steps/CallFuncFromSetStep.js"></script>
 <script src="~/Scripts/IDE/Steps/CallFilterFunctionStep.js"></script>
 <script src="~/Scripts/IDE/Steps/DateStep.js"></script>
 <script src="~/Scripts/IDE/Steps/FieldStep.js"></script>
@@ -53,9 +54,9 @@
 </div>
 
 <script>
-
+    
     $(function () {
-        var code_block = new IDE.CodeBlock();
+        var code_block = new IDE.Functions.DataExtractionFunction();
         code_block.Test();
     });
 

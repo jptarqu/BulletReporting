@@ -177,6 +177,7 @@
     <Content Include="Views\Shared\Steps\CallFilterFunctionStep.cshtml" />
     <Content Include="Views\Shared\Steps\DateStep.cshtml" />
     <Content Include="Views\Shared\Steps\OperatorStep.cshtml" />
+    <Content Include="Views\Shared\Dialogs\ReferenceDialog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -190,7 +191,7 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\IDE\DataExtractionFunction.ts" />
+    <TypeScriptCompile Include="Scripts\IDE\Functions\DataExtractionFunction.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Contracts\DatasetContract.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Contracts\IContract.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Dialogs\HelpCallback.ts" />
