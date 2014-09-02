@@ -6,6 +6,7 @@ module IDE.Functions {
 		ChildFunctions = ko.observableArray<Functions.IFunction>();
         UserSteps = ko.observableArray<Steps.DatasetValueStep>(); //only DatasetValueStep and static value steps can be used from DataExtractionFunctions
         AvailableSingleValueStepNames = ko.observableArray<string>();
+        ReferenceDialog = new IDE.Dialogs.ReferenceDialog();
 
         Test(): void {
             var testdata =
@@ -154,45 +155,34 @@ module IDE.Functions {
         LoadDataFromJSON(json_data: any): void {
             var self: DataExtractionFunction = this;
             Utils.CopyPropertiesToKO(json_data, self);
-            //for (var func_idx = 0; func_idx < json_functions.length; func_idx++) {
-            //    var entry = json_functions[func_idx];
-
-            //    var new_func: Functions.IFunction = null;
-            //    if (entry.FunctionTypeName == "FilterFunction") {
-            //        var new_filter_func = new Functions.FilterFunction();
-            //        new_filter_func.LoadDataFromJSON(entry);
-            //        new_func = new_filter_func;
-            //    }
-            //    self.ChildFunctions.push(new_func);
-            //}
-
-            //Utils.CopyPropertiesToKO(json_steps, this);
-            //for (var step_idx = 0; step_idx < json_steps.length; step_idx++)
-            //{
-            //    var entry = json_steps[step_idx];
-            //    console.log(entry);
-            //    var new_step:Steps.IStep = null;
-            //    if (entry.StepTypeName == "TableLoadStep")
-            //    {
-            //        var new_table = new Steps.TableLoadStep();
-            //        new_table.LoadDataFromJSON(entry);
-            //        new_step = new_table;
-            //    }
-            //    self.UserSteps.push(new_step);
-            //}
 
         }
 
         SaveDataToJSON(): string {
             var json_data = ko.toJSON(this);
-            //var steps = this.UserSteps();
-            //var field_names: Array<string> = null;
-            
-            ////foreach step, save to json
-            //for (var step_idx = 0; step_idx < steps.length; step_idx++) {
-            //    json_data += steps[step_idx].to
-            //}
             return json_data;
+        }
+
+        ShowAvailableSingleValueStepNames(calling_step: IDE.Steps.IStep): void {
+
+            var db_fields = this.GetPreviousDatasetFieldNames(calling_step);
+            var var_fields = this.GetSingleValueNames(calling_step);
+            var all_fields = db_fields.concat(var_fields);
+            this.ReferenceDialog.Display(
+                (keyword: string) => {
+                    if (keyword == "") {
+                        return all_fields;
+                    }
+                    else {
+                        return all_fields.filter(
+                            (element: string) => element.indexOf(keyword) >= 0
+                            )
+
+                    }
+                }
+                ,
+                (keyword: string) => ""
+                );
         }
 
         RefreshAvailableSingleValueStepNames(calling_step: IDE.Steps.IStep): void {
@@ -209,7 +199,7 @@ module IDE.Functions {
 
             for (var step_idx = 0; step_idx < steps.length; step_idx++) {
                 if (steps[step_idx] == calling_step) {
-                    //reached the callinmg step, shoud not go futher into future steps
+                    //reached the calling step, shoud not go futher into future steps
                     break;
                 }
                 if (steps[step_idx] instanceof  Steps.SingleValueStep) {

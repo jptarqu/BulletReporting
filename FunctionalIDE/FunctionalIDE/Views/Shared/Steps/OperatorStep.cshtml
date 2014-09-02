@@ -8,7 +8,8 @@
                 </div>
             </div>
             <div class="operand">
-                <select data-bind="click: $parent.RefreshAvailableSingleValueStepNames, options: $parent.AvailableSingleValueStepNames"></select>
+                <div data-bind="text: $data" />
+                <button data-bind="click: $parent[2].ShowAvailableSingleValueStepNames">*</button><!-- CALLS the dialog from the parent function or code block-->
                 
             </div>
         </div>

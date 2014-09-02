@@ -1,13 +1,14 @@
-﻿<script id="IDE.Dialogs.ReferenceDialog" type="text/html">
-    <div class="reference-dialog">
-        <input type="text" name="KeywordSearch" data-bind="value: SearchEntry" />
+﻿
+<div id="ReferenceDialogPlaceholder">
+
+    <div class="reference-dialog" data-bind="with: ReferenceDialog">
+        <input type="text" name="KeywordSearch" data-bind="value: SearchEntry" /><button data-bind="click: PerformSearch">Search</button>
         <br />
 
         <select data-bind="options: SearchResults" size="7"></select>
+        <br />
         <div class="reference-dialog-help" data-bind="html: Help">
 
         </div>
     </div>
-</script>
-<script id="IDE.Dialogs.ReferenceDialog" type="text/html">
-</script>
+</div>

@@ -35,7 +35,11 @@
 <script src="~/Scripts/IDE/Steps/TableLoadStep.js"></script>
 <script src="~/Scripts/IDE/Steps/TextStep.js"></script>
 
-<!-- Teamplates -->
+<script src="~/Scripts/IDE/Dialogs/HelpCallback.js"></script>
+<script src="~/Scripts/IDE/Dialogs/ReferenceDialog.js"></script>
+<script src="~/Scripts/IDE/Dialogs/SearchCallback.js"></script>
+
+<!-- Templates -->
 @Html.Partial("~/Views/Shared/Steps/CallFilterFunctionStep.cshtml")
 @Html.Partial("~/Views/Shared/Steps/DateStep.cshtml")
 @Html.Partial("~/Views/Shared/Steps/FunctionExpression.cshtml")
@@ -52,9 +56,9 @@
     <div data-bind="template: { name: TypeName }">
     </div>
 </div>
-
+@Html.Partial("~/Views/Shared/Dialogs/ReferenceDialog.cshtml")
 <script>
-    
+
     $(function () {
         var code_block = new IDE.Functions.DataExtractionFunction();
         code_block.Test();
