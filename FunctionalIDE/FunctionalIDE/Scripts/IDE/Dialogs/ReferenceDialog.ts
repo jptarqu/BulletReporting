@@ -10,10 +10,13 @@ module IDE.Dialogs {
         SearchEntry = ko.observable<string>("");
         SearchResults = ko.observableArray<string>([]);
         Help = ko.observable<string>("");
+        IsVisible = ko.observable<boolean>(true);
 
         Display(search_func: SearchCallback, help_func: HelpCallback): void {
             this.SearchFunction = search_func;
             this.HelpFunction = help_func;
+            this.IsVisible(true);
+            this.PerformSearch(); //default search
         }
 
         PerformSearch(): void {

@@ -9,7 +9,7 @@
             </div>
             <div class="operand">
                 <div data-bind="text: $data" />
-                <button data-bind="click: $parent[2].ShowAvailableSingleValueStepNames">*</button><!-- CALLS the dialog from the parent function or code block-->
+                <button data-bind="click: function() { $parents[1].ShowAvailableSingleValueStepNames($parent); } ">*</button><!-- CALLS the dialog from the parent function or code block-->
                 
             </div>
         </div>
