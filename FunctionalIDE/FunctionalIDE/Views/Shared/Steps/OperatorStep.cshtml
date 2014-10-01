@@ -8,8 +8,9 @@
                 </div>
             </div>
             <div class="operand">
-                <div data-bind="text: $data" />
-                <button data-bind="click: function() { $parents[1].ShowAvailableSingleValueStepNames($parent); } ">*</button><!-- CALLS the dialog from the parent function or code block-->
+                <div data-bind="text: StepName" />
+
+                <button data-bind="click: function () { $parents[1].ShowAvailableSingleValueStepNames($parent, $data) } ">*</button><!-- CALLS the dialog from the parent function or code block-->
                 
             </div>
         </div>

@@ -73,6 +73,9 @@
             },
             "IDE.Steps.TextStep": function () {
                 return new IDE.Steps.TextStep();
+            },
+            "IDE.Expressions.StepReferenceSingleValue": function () {
+                return new IDE.Expressions.StepReferenceSingleValue("");
             }
         };
         return Utils;

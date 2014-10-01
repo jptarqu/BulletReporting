@@ -192,16 +192,14 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\IDE\Dialogs\OnSelectCallback.ts" />
+    <TypeScriptCompile Include="Scripts\IDE\Expressions\StepReferenceSingleValue.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Functions\DataExtractionFunction.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Contracts\DatasetContract.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Contracts\IContract.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Dialogs\HelpCallback.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Dialogs\SearchCallback.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Dialogs\ReferenceDialog.ts" />
-    <TypeScriptCompile Include="Scripts\IDE\Expressions\OperatorExpression.ts" />
-    <TypeScriptCompile Include="Scripts\IDE\Expressions\DateExpression.ts" />
-    <TypeScriptCompile Include="Scripts\IDE\Expressions\TextExpression.ts" />
-    <TypeScriptCompile Include="Scripts\IDE\Expressions\NumberExpression.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Expressions\FieldExpression.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Functions\FunctionFromDataset.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Functions\IFunction.ts" />

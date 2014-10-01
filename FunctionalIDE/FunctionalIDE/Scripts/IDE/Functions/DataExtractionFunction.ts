@@ -72,8 +72,14 @@ module IDE.Functions {
                             "StepName": "MyOffset",
                             "Operator": "+",
                             "OperandVarNames": [
-                                "tax",
-                                "penalty"
+                                {
+                                    "TypeName": "IDE.Expressions.StepReferenceSingleValue",
+                                    "StepName": "tax"
+                                },
+                                {
+                                    "TypeName": "IDE.Expressions.StepReferenceSingleValue",
+                                    "StepName": "penalty"
+                                }
                             ]
                         },
                         {
@@ -95,7 +101,7 @@ module IDE.Functions {
             this.LoadDataFromJSON(
                 testdata
                 );
-            //this.Test();
+            //this.CreateFilterTest();
             ko.applyBindings(this);
             console.log(this.SaveDataToJSON());
         }
@@ -129,15 +135,15 @@ module IDE.Functions {
             var new_op = new Steps.OperatorStep();
             new_op.StepName("MyOffset");
             new_op.Operator("+");
-            new_op.OperandVarNames.push("tax");
-            new_op.OperandVarNames.push("penalty");
+            new_op.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("tax"));
+            new_op.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("penalty"));
             new_func.UserSteps.push(new_op);
             
             //add the comparison to the filter function's body
             var new_comp = new Steps.OperatorStep();
             new_comp.Operator(">");
-            new_comp.OperandVarNames.push("Dataset.Tran Amount"); //Dataset is the name of the dataset param sent to the filter function
-            new_comp.OperandVarNames.push("Offset");
+            new_comp.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("Dataset.Tran Amount")); //Dataset is the name of the dataset param sent to the filter function
+            new_comp.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("Offset"));
             new_func.AddStep(new_comp);
 
             this.ChildFunctions.push(new_func);
@@ -163,7 +169,7 @@ module IDE.Functions {
             return json_data;
         }
 
-        ShowAvailableSingleValueStepNames(calling_step: IDE.Steps.IStep): void {
+        ShowAvailableSingleValueStepNames(calling_step: IDE.Steps.IStep, calling_reference: IDE.Expressions.StepReferenceSingleValue): void {
 
             var db_fields = this.GetPreviousDatasetFieldNames(calling_step);
             var var_fields = this.GetSingleValueNames(calling_step);
@@ -182,6 +188,9 @@ module IDE.Functions {
                 }
                 ,
                 (keyword: string) => ""
+                , (chosen_item: string) => {
+                    calling_reference.SetReference(chosen_item);
+                }
                 );
         }
 

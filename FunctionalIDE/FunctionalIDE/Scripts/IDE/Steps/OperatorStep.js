@@ -10,12 +10,16 @@ var IDE;
                 this.OperandVarNames = ko.observableArray();
             }
             OperatorStep.prototype.UpdateStepName = function (old_name, new_name) {
-                //TODO: find in OperandVarNames and replace
+                //var item_idx = this.OperandVarNames.indexOf(old_name);
+                //this.OperandVarNames[item_idx](new_name);
             };
 
             OperatorStep.prototype.LoadDataFromJSON = function (source) {
                 // a utility that copies properties into this instance
                 IDE.Utils.CopyPropertiesToKO(source, this);
+            };
+
+            OperatorStep.prototype.SetReference = function (reference_name, index) {
             };
             return OperatorStep;
         })();

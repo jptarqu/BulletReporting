@@ -11,6 +11,7 @@ module IDE {
             "IDE.Steps.OperatorStep": () => { return new IDE.Steps.OperatorStep(); },
             "IDE.Steps.TableLoadStep": () => { return new IDE.Steps.TableLoadStep(); },
             "IDE.Steps.TextStep": () => { return new IDE.Steps.TextStep(); },
+            "IDE.Expressions.StepReferenceSingleValue": () => { return new IDE.Expressions.StepReferenceSingleValue(""); }
         };
 
         public static CreateFunctionFromDataset(data_fields_to_use: Array<string>): IDE.Functions.FunctionFromDataset  {
