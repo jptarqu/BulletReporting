@@ -10,8 +10,7 @@ var IDE;
                 this.OperandVarNames = ko.observableArray();
             }
             OperatorStep.prototype.UpdateStepName = function (old_name, new_name) {
-                //var item_idx = this.OperandVarNames.indexOf(old_name);
-                //this.OperandVarNames[item_idx](new_name);
+                //not used
             };
 
             OperatorStep.prototype.LoadDataFromJSON = function (source) {
@@ -20,6 +19,11 @@ var IDE;
             };
 
             OperatorStep.prototype.SetReference = function (reference_name, index) {
+                //not used
+            };
+
+            OperatorStep.prototype.AddOperand = function () {
+                this.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue(""));
             };
             return OperatorStep;
         })();

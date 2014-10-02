@@ -8,9 +8,8 @@ module IDE.Steps {
         OperandVarNames = ko.observableArray<IDE.Expressions.StepReferenceSingleValue>(); 
 
 		UpdateStepName(old_name: string, new_name: string): void
-		{
-            //var item_idx = this.OperandVarNames.indexOf(old_name);
-            //this.OperandVarNames[item_idx](new_name);
+        {
+            //not used
 		}
 		
         LoadDataFromJSON(source): void {
@@ -19,7 +18,11 @@ module IDE.Steps {
         }
 
         SetReference(reference_name: string, index: number): void {
+            //not used
+        }
 
+        AddOperand(): void {
+            this.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue(""));
         }
     }
 }  

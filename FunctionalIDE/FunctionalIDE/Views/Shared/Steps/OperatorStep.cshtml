@@ -1,19 +1,18 @@
 ﻿
 <script id="IDE.Steps.OperatorStep" type="text/html">
     <div class="operator-step exp">
-        <div data-bind="foreach: OperandVarNames ">
-            <div class="operator" data-bind="if: $index() > 0 ">
+        <div data-bind="foreach: OperandVarNames " class="row">
+            <div class="operator col-md-1" data-bind="if: $index() > 0 ">
                 <div>
-                    <input type="text" data-bind="value: $parent.Operator" />
+                    <input type="text" class="form-control" data-bind="value: $parent.Operator" />
                 </div>
             </div>
-            <div class="operand">
-                <div data-bind="text: StepName" />
+            <div class="operand col-md-1" data-bind="template: { name: TypeName }">
 
-                <button data-bind="click: function () { $parents[1].ShowAvailableSingleValueStepNames($parent, $data) } ">*</button><!-- CALLS the dialog from the parent function or code block-->
-                
             </div>
         </div>
+
+        <button data-bind="click: AddOperand " >Add</button>
     </div>
 </script>
 <script id="OperatorStepDisplay" type="text/html">

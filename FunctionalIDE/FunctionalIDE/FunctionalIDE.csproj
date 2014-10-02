@@ -179,6 +179,7 @@
     <Content Include="Views\Shared\Steps\DateStep.cshtml" />
     <Content Include="Views\Shared\Steps\OperatorStep.cshtml" />
     <Content Include="Views\Shared\Dialogs\ReferenceDialog.cshtml" />
+    <Content Include="Views\Shared\Expressions\StepReferenceSingleValue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

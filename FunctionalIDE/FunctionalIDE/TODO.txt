@@ -1,4 +1,5 @@
-﻿Add ability to remove operand
+﻿Add ability to add operand
+Add ability to remove operand
 emulate functionality for dataset reference selectetor and table selector
 add ability to add step
 add ability to remove step
