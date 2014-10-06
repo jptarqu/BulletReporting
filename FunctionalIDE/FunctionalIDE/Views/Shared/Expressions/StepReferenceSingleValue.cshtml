@@ -1,10 +1,8 @@
 ﻿
 <script id="IDE.Expressions.StepReferenceSingleValue" type="text/html">
-    
-            <div class="reference-single-value">
-                <div data-bind="text: StepName" />
+    <button type="button" class="reference-single-value btn btn-primary" data-bind="click: function () { $parents[1].ShowAvailableSingleValueStepNames($parent, $data) }, text: StepName, css: { 'btn-warning': IsSelected } ">Select Reference</button><!-- CALLS the dialog from the parent function or code block-->
 
-                <button data-bind="click: function () { $parents[1].ShowAvailableSingleValueStepNames($parent, $data) } ">*</button><!-- CALLS the dialog from the parent function or code block-->
-
-            </div>
+            @*<div class="reference-single-value">
+                
+            </div>*@
 </script>

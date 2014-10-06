@@ -5,6 +5,7 @@ module IDE.Expressions {
     export class StepReferenceSingleValue {
         TypeName = "IDE.Expressions.StepReferenceSingleValue";
         StepName = ko.observable<string>();
+        IsSelected = ko.observable<boolean>();
 
         constructor(reference_name: string) {
             this.StepName(reference_name);

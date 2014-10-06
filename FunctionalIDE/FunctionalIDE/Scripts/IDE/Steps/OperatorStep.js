@@ -25,6 +25,10 @@ var IDE;
             OperatorStep.prototype.AddOperand = function () {
                 this.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue(""));
             };
+
+            OperatorStep.prototype.RemoveReference = function (reference) {
+                this.OperandVarNames.remove(reference);
+            };
             return OperatorStep;
         })();
         Steps.OperatorStep = OperatorStep;

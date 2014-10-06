@@ -55,8 +55,8 @@
 
 </div>
 
-<div data-bind="foreach: UserSteps" class="row">
-    <div data-bind="template: { name: TypeName }">
+<div data-bind="foreach: UserSteps" >
+    <div data-bind="template: { name: TypeName }" class="row step">
     </div>
 </div>
 @Html.Partial("~/Views/Shared/Dialogs/ReferenceDialog.cshtml")

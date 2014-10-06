@@ -169,11 +169,12 @@ module IDE.Functions {
             return json_data;
         }
 
-        ShowAvailableSingleValueStepNames(calling_step: IDE.Steps.IStep, calling_reference: IDE.Expressions.StepReferenceSingleValue): void {
+        ShowAvailableSingleValueStepNames(calling_step: IDE.Steps.IDependsOnSingleValueSteps, calling_reference: IDE.Expressions.StepReferenceSingleValue): void {
 
             var db_fields = this.GetPreviousDatasetFieldNames(calling_step);
             var var_fields = this.GetSingleValueNames(calling_step);
             var all_fields = db_fields.concat(var_fields);
+            calling_reference.IsSelected(true);
             this.ReferenceDialog.Display(
                 (keyword: string) => {
                     if (keyword == "") {
@@ -190,6 +191,10 @@ module IDE.Functions {
                 (keyword: string) => ""
                 , (chosen_item: string) => {
                     calling_reference.SetReference(chosen_item);
+                    calling_reference.IsSelected(false);
+                }
+                , () => {
+                    calling_step.RemoveReference(calling_reference);
                 }
                 );
         }

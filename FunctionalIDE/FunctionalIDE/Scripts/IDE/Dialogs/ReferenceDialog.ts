@@ -7,6 +7,7 @@ module IDE.Dialogs {
         OnSelectFunction: OnSelectCallback; //passed by callers to allow returning chosen item
         SearchFunction: SearchCallback; //passed by callers to allow search
         HelpFunction: HelpCallback; //passed by callers to disaply help on a item selected
+        OnDeleteFunction: OnDeleteCallback; //passed by callers to handle a request to delete reference
 
         SearchEntry = ko.observable<string>("");
         SearchResults = ko.observableArray<string>([]);
@@ -14,10 +15,15 @@ module IDE.Dialogs {
         Help = ko.observable<string>("");
         IsVisible = ko.observable<boolean>(true);
 
-        Display(search_func: SearchCallback, help_func: HelpCallback, chosen_func: OnSelectCallback): void {
+        Display(search_func: SearchCallback, help_func: HelpCallback,
+            chosen_func: OnSelectCallback,
+            del_func: OnDeleteCallback
+            //default_value: string
+            ): void {
             this.SearchFunction = search_func;
             this.HelpFunction = help_func;
             this.OnSelectFunction = chosen_func;
+            this.OnDeleteFunction = del_func;
             this.IsVisible(true);
             this.PerformSearch(); //default search
         }
@@ -30,6 +36,11 @@ module IDE.Dialogs {
             this.OnSelectFunction(this.SelectedEntry());
             this.IsVisible(false);
         }
+        DeleteReference(): void {
+            this.OnDeleteFunction();
+            this.IsVisible(false);
+        }
+
 
         
     }

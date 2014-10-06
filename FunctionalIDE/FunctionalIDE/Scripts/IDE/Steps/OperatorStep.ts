@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
 
 module IDE.Steps {
-    export class OperatorStep implements IStep, ISingleValueStep, IDependsOnSingleValueSteps {
+    export class OperatorStep implements ISingleValueStep, IDependsOnSingleValueSteps {
         TypeName: string = "IDE.Steps.OperatorStep";
         StepName = ko.observable<string>("");
         Operator = ko.observable<string>();
@@ -23,6 +23,10 @@ module IDE.Steps {
 
         AddOperand(): void {
             this.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue(""));
+        }
+
+        RemoveReference(reference: IDE.Expressions.StepReferenceSingleValue ): void {
+            this.OperandVarNames.remove(<IDE.Expressions.StepReferenceSingleValue> reference );
         }
     }
 }  
