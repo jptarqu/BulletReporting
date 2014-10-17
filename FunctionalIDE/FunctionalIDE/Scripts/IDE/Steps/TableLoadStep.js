@@ -14,7 +14,22 @@ var IDE;
                 _super.apply(this, arguments);
                 this.TypeName = "IDE.Steps.TableLoadStep";
                 this.Name = ko.observable("");
+                this.TableName = ko.observable("");
+                this.IsSelected = ko.observable();
             }
+            //Called by the parent function with info from a dialog
+            TableLoadStep.prototype.SetReference = function (reference_name, field_names) {
+                this.TableName(reference_name);
+                this.FieldNames(field_names);
+            };
+
+            TableLoadStep.prototype.RemoveReference = function (reference_name) {
+                if (reference_name == this.Name()) {
+                    this.TableName("");
+                    this.FieldNames.removeAll();
+                }
+            };
+
             TableLoadStep.prototype.LoadDataFromJSON = function (source) {
                 // a utility that copies properties into this instance
                 IDE.Utils.CopyPropertiesToKO(source, this);

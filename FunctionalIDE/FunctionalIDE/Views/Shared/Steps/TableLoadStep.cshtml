@@ -1,6 +1,15 @@
 ﻿<!-- Numeric -->
 <script id="IDE.Steps.TableLoadStep" type="text/html">
-    <div class="table-load-step exp">
+    <div class="table-load-step exp row">
+
+        <div class="db-table-name col-md-2" data-bind="text: TableName">
+        </div>
+        <div data-bind="foreach: FieldNames " >
+            <div class="db-field-name col-md-1" data-bind="text: $data">
+            </div>
+        </div>
+        <button type="button" class="reference-single-value btn btn-primary" data-bind="click: function () { $parents[1].ShowAvailableDBTableNames($parent, $data) }, text: StepName, css: { 'btn-warning': IsSelected } ">Select Reference</button><!-- CALLS the dialog from the parent function or code block-->
+
     </div>
 </script>
 <script id="IDE.Steps.TableLoadStepDisplay" type="text/html">

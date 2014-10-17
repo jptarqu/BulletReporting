@@ -168,7 +168,43 @@ module IDE.Functions {
             var json_data = ko.toJSON(this);
             return json_data;
         }
+        GetDBTableNames(): Array<string> {
+            return ['TRANSACTIONS', 'CUSTOMERS'];
+        }
+        GetTableDescription(table_name: string): string {
+            return "<p>This is the <strong>Help!</strong>.</p>";
+        }
+        GetDBTableFields(table_name: string): string[] {
+            return ['ACCT_NUM', 'AMOUNT'];
+        }
+        //Called by the UI when the user is trying to select a table from the db.
+        ShowAvailableDBTableNames(calling_step: IDE.Steps.TableLoadStep)// calling_reference: IDE.Expressions.StepReferenceSingleValue)
+            : void {
 
+            var db_tables = this.GetDBTableNames();
+            this.ReferenceDialog.Display(
+                (keyword: string) => {
+                    if (keyword == "") {
+                        return db_tables;
+                    }
+                    else {
+                        return db_tables.filter(
+                            (element: string) => element.indexOf(keyword) >= 0
+                            )
+
+                    }
+                }
+                ,
+                this.GetTableDescription
+                , (chosen_item: string) => {
+                    var field_names = this.GetDBTableFields(chosen_item);
+                    calling_step.SetReference(chosen_item, field_names);
+                }
+                , null
+                );
+        }
+
+        //Called by the UI when the user is trying to select a single value reference.
         ShowAvailableSingleValueStepNames(calling_step: IDE.Steps.IDependsOnSingleValueSteps, calling_reference: IDE.Expressions.StepReferenceSingleValue): void {
 
             var db_fields = this.GetPreviousDatasetFieldNames(calling_step);

@@ -1,5 +1,5 @@
 ﻿Add ability to add operand (DONE)
 Add ability to remove operand (Done)
-emulate functionality for dataset reference selectetor and table selector
+emulate functionality for dataset reference selectetor and table selector  
 add ability to add step
 add ability to remove step
