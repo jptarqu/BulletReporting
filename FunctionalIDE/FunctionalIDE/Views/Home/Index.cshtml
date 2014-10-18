@@ -5,6 +5,7 @@
 
 <script src="~/Scripts/jquery-2.1.1.min.js"></script>
 <script src="~/Scripts/knockout-3.1.0.debug.js"></script>
+<script src="~/Scripts/IDE/Factory.js"></script>
 <script src="~/Scripts/IDE/Utils.js"></script>
 <script src="~/Scripts/IDE/IScope.js"></script>
 <script src="~/Scripts/IDE/Contracts/IContract.js"></script>
@@ -54,9 +55,17 @@
 <div class="jumbotron">
 
 </div>
+<div class="user-function">
+    <h3>Extract Function</h3>
+    <p>Add:</p>
+    <button type="button" class="btn btn-primary"
+            data-bind="click:AddStep.bind($data,'IDE.Steps.TableLoadStep')">
+        Table Load
+    </button><!-- CALLS the dialog from the parent function or code block-->
 
-<div data-bind="foreach: UserSteps" >
-    <div data-bind="template: { name: TypeName }" class="row step">
+    <div data-bind="foreach: UserSteps">
+        <div data-bind="template: { name: TypeName }" class="row step">
+        </div>
     </div>
 </div>
 @Html.Partial("~/Views/Shared/Dialogs/ReferenceDialog.cshtml")

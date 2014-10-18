@@ -7,6 +7,13 @@ module IDE.Functions {
         UserSteps = ko.observableArray<Steps.DatasetValueStep>(); //only DatasetValueStep and static value steps can be used from DataExtractionFunctions
         AvailableSingleValueStepNames = ko.observableArray<string>();
         ReferenceDialog = new IDE.Dialogs.ReferenceDialog();
+        CurrStepIdx = 0; 
+
+        AddStep(step_type: string) {
+            var new_step = Factory.Factories[step_type]();
+            this.UserSteps.splice(this.CurrStepIdx, 0,new_step);
+            this.CurrStepIdx++;
+        }
 
         Test(): void {
             var testdata =
@@ -98,9 +105,9 @@ module IDE.Functions {
                     ],
                     "AvailableSingleValueStepNames": []
                 } ;
-            this.LoadDataFromJSON(
-                testdata
-                );
+            //this.LoadDataFromJSON(
+            //    testdata
+            //    );
             //this.CreateFilterTest();
             ko.applyBindings(this);
             console.log(this.SaveDataToJSON());
@@ -297,7 +304,7 @@ module IDE.Functions {
 
         CreateFunctionFromDataset(step: Steps.CallFuncFromSetStep): void {
             var fields_required = this.GetDatasetFieldNames(step, step.DatasetName());
-            var new_func = Utils.CreateFunctionFromDataset(fields_required);
+            var new_func = Factory.CreateFunctionFromDataset(fields_required);
             step.FunctionName(new_func.FunctionName() );
         }
     }

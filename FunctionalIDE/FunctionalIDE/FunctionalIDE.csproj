@@ -224,6 +224,7 @@
     <TypeScriptCompile Include="Scripts\IDE\Steps\TableLoadStep.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Steps\TextStep.ts" />
     <TypeScriptCompile Include="Scripts\IDE\StepNameProvider.ts" />
+    <TypeScriptCompile Include="Scripts\IDE\Factory.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Utils.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout.mapper\knockout.mapper.d.ts" />
