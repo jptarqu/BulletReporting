@@ -180,6 +180,7 @@
     <Content Include="Views\Shared\Steps\OperatorStep.cshtml" />
     <Content Include="Views\Shared\Dialogs\ReferenceDialog.cshtml" />
     <Content Include="Views\Shared\Expressions\StepReferenceSingleValue.cshtml" />
+    <Content Include="Views\Shared\Functions\FilterFunction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -203,6 +204,7 @@
     <TypeScriptCompile Include="Scripts\IDE\Dialogs\SearchCallback.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Dialogs\ReferenceDialog.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Expressions\FieldExpression.ts" />
+    <TypeScriptCompile Include="Scripts\IDE\Functions\FilterFunction.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Functions\FunctionFromDataset.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Functions\IFunction.ts" />
     <TypeScriptCompile Include="Scripts\IDE\IScope.ts" />

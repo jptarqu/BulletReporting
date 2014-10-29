@@ -1,0 +1,39 @@
+﻿<!-- Numeric -->
+<script id="IDE.Functions.FilterFunction" type="text/html">
+    <h3 data-bind="text: FunctionName"></h3>
+    <p>Add:</p>
+    <button type="button" class="btn btn-primary"
+            data-bind="click:AddStep.bind($data,'IDE.Steps.NumberStep')">
+        Number
+    </button>
+
+    <button type="button" class="btn btn-primary"
+            data-bind="click:AddStep.bind($data,'IDE.Steps.OperatorStep')">
+        Operator
+    </button>
+
+    <div data-bind="foreach: UserSteps">
+        <div data-bind="template: { name: TypeName }" class="row step">
+        </div>
+    </div>
+
+    <div class="reference-dialog" data-bind="with: ReferenceDialog">
+        <input type="text" name="KeywordSearch" data-bind="value: SearchEntry" />
+        <button data-bind="click: PerformSearch">Search</button>
+        <br />
+
+        <select data-bind="options: SearchResults, value: SelectedEntry" size="7"></select>
+        <br />
+        <div class="reference-dialog-help" data-bind="html: Help">
+
+        </div>
+
+        <button data-bind="click: ChooseResult">Select</button>
+        <hr />
+
+        <button data-bind="click: DeleteReference">Delete</button>
+
+    </div>
+</script>
+<script id="IDE.Steps.TableLoadStepDisplay" type="text/html">
+</script>

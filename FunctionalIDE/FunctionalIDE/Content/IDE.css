@@ -4,4 +4,7 @@
 .step {
   border: 1px solid black;
 }
+.table-load-step {
+  border-left: thick solid #ff0000;
+}
 /*# sourceMappingURL=IDE.css.map */

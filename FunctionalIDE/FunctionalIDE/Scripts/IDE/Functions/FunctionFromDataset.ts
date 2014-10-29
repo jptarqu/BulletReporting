@@ -8,8 +8,13 @@ module IDE.Functions {
         FunctionParams = ko.observableArray<IDE.Params.Param>();
         UserSteps = ko.observableArray<IDE.Steps.ISingleValueStep>(); //UserVarSteps can only be static values or operators or function calls
 
-        AddStep(new_step: IDE.Steps.ISingleValueStep): void {
-            this.UserSteps.push(new_step);
+        ReferenceDialog = new IDE.Dialogs.ReferenceDialog();
+        CurrStepIdx = 0; 
+
+        AddStep(step_type: string) {
+            var new_step = Factory.Factories[step_type]();
+            this.UserSteps.splice(this.CurrStepIdx, 0, new_step);
+            this.CurrStepIdx++;
         }
         RemoveStep(del_step: IDE.Steps.ISingleValueStep): void {
             this.UserSteps.remove(del_step);
@@ -25,6 +30,55 @@ module IDE.Functions {
             //find the calling step
             var field_contracts = this.DatasetContract().FieldsRequired();
                 return field_contracts;
+        }
+
+        GetSingleValueNames(calling_step: IDE.Steps.IStep): Array<string> {
+
+            var steps = this.UserSteps();
+            var field_names: Array<string> = [];
+
+            for (var step_idx = 0; step_idx < steps.length; step_idx++) {
+                if (steps[step_idx] == calling_step) {
+                    //reached the calling step, shoud not go futher into future steps
+                    break;
+                }
+                if (steps[step_idx] instanceof Steps.SingleValueStep) {
+                    field_names.push((<Steps.SingleValueStep> steps[step_idx]).StepName());
+                }
+            }
+            return field_names;
+        }
+
+        //Called by the UI when the user is trying to select a single value reference.
+        ShowAvailableSingleValueStepNames(calling_step: IDE.Steps.IDependsOnSingleValueSteps,
+            calling_reference: IDE.Expressions.StepReferenceSingleValue): void {
+
+            var db_fields = this.DatasetContract().FieldsRequired();
+            var var_fields = this.GetSingleValueNames(calling_step);
+            var all_fields = db_fields.concat(var_fields);
+            calling_reference.IsSelected(true);
+            this.ReferenceDialog.Display(
+                (keyword: string) => {
+                    if (keyword == "") {
+                        return all_fields;
+                    }
+                    else {
+                        return all_fields.filter(
+                            (element: string) => element.indexOf(keyword) >= 0
+                            )
+
+                    }
+                }
+                ,
+                (keyword: string) => ""
+                , (chosen_item: string) => {
+                    calling_reference.SetReference(chosen_item);
+                    calling_reference.IsSelected(false);
+                }
+                , () => {
+                    calling_step.RemoveReference(calling_reference);
+                }
+                );
         }
     }
 }  

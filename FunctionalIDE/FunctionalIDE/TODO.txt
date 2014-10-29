@@ -1,5 +1,9 @@
 ﻿Add ability to add operand (DONE)
 Add ability to remove operand (Done)
-emulate functionality for dataset reference selectetor and table selector  
-add ability to add step
+emulate functionality for dataset reference selectetor and table selector   (Done)
+add ability to add step 
+	table step (Done)
+	filter step
+		
+		figure a way to share reference dialog?
 add ability to remove step

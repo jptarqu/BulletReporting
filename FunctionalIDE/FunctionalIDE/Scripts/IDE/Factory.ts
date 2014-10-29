@@ -2,7 +2,7 @@
 module IDE {
     export class Factory {
         public static Factories: Object = {
-            "IDE.Functions.FunctionFromDataset": () => { return new IDE.Functions.FunctionFromDataset(); },
+            "IDE.Functions.FilterFunction": () => { return new IDE.Functions.FilterFunction(); },
             "IDE.Params.DataSetParam": () => { return new IDE.Params.DataSetParam(); },
             "IDE.Steps.CallFilterFunctionStep": () => { return new IDE.Steps.CallFilterFunctionStep(); },
             "IDE.Steps.DateStep": () => { return new IDE.Steps.DateStep(); },

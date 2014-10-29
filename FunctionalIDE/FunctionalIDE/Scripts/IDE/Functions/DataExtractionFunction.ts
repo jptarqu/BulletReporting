@@ -3,7 +3,10 @@
 module IDE.Functions {
     export class DataExtractionFunction implements IScope {
 		
-		ChildFunctions = ko.observableArray<Functions.IFunction>();
+        ChildFunctions = ko.observableArray<Functions.IFunction>();
+
+        FilterFunctions = ko.observableArray<Functions.FilterFunction>();
+
         UserSteps = ko.observableArray<Steps.DatasetValueStep>(); //only DatasetValueStep and static value steps can be used from DataExtractionFunctions
         AvailableSingleValueStepNames = ko.observableArray<string>();
         ReferenceDialog = new IDE.Dialogs.ReferenceDialog();

@@ -1,36 +1,22 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
 var IDE;
 (function (IDE) {
     (function (Functions) {
-        var FunctionFromDataset = (function () {
-            function FunctionFromDataset() {
+        var FilterFunction = (function (_super) {
+            __extends(FilterFunction, _super);
+            function FilterFunction() {
+                _super.apply(this, arguments);
                 this.TypeName = "IDE.Functions.FilterFunction";
-                this.DatasetContract = ko.observable();
-                this.FunctionName = ko.observable("");
-                this.FunctionParams = ko.observableArray();
-                this.UserSteps = ko.observableArray();
             }
-            FunctionFromDataset.prototype.AddStep = function (new_step) {
-                this.UserSteps.push(new_step);
-            };
-            FunctionFromDataset.prototype.RemoveStep = function (del_step) {
-                this.UserSteps.remove(del_step);
-            };
-
-            FunctionFromDataset.prototype.LoadDataFromJSON = function (source) {
-                // a utility that copies properties into this instance
-                IDE.Utils.CopyPropertiesToKO(source, this);
-            };
-
-            //We will opass this function to the child steps so that they can call it to request the names of fields of steps before them
-            FunctionFromDataset.prototype.GetDatasetFieldNames = function (calling_step, dataset_name) {
-                //find the calling step
-                var field_contracts = this.DatasetContract().FieldsRequired();
-                return field_contracts;
-            };
-            return FunctionFromDataset;
-        })();
-        Functions.FunctionFromDataset = FunctionFromDataset;
+            return FilterFunction;
+        })(Functions.FunctionFromDataset);
+        Functions.FilterFunction = FilterFunction;
     })(IDE.Functions || (IDE.Functions = {}));
     var Functions = IDE.Functions;
 })(IDE || (IDE = {}));

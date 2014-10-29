@@ -50,6 +50,7 @@
 @Html.Partial("~/Views/Shared/Steps/NumberStep.cshtml")
 @Html.Partial("~/Views/Shared/Steps/OperatorStep.cshtml")
 @Html.Partial("~/Views/Shared/Steps/TableLoadStep.cshtml")
+@Html.Partial("~/Views/Shared/Functions/FilterFunction.cshtml")
 
 
 <div class="jumbotron">
@@ -65,6 +66,16 @@
 
     <div data-bind="foreach: UserSteps">
         <div data-bind="template: { name: TypeName }" class="row step">
+        </div>
+    </div>
+
+    <div class="filters-container">
+        <h3>Filter Functions</h3>
+        
+        <div data-bind="foreach: FilterFunctions">
+            <div data-bind="template: { name: TypeName }" class="filter-container">
+
+            </div>
         </div>
     </div>
 </div>
