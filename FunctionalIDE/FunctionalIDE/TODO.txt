@@ -4,6 +4,7 @@ emulate functionality for dataset reference selectetor and table selector   (Don
 add ability to add step 
 	table step (Done)
 	filter step
-		
+		must find a way to generate new func based on dataset passed
+		find a way to allow users to add contracts to the filter function definition?
 		figure a way to share reference dialog?
 add ability to remove step

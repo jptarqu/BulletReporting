@@ -63,6 +63,10 @@
             data-bind="click:AddStep.bind($data,'IDE.Steps.TableLoadStep')">
         Table Load
     </button><!-- CALLS the dialog from the parent function or code block-->
+    <button type="button" class="btn btn-primary"
+            data-bind="click:AddStep.bind($data,'IDE.Steps.CallFilterFunctionStep')">
+        Filter
+    </button>
 
     <div data-bind="foreach: UserSteps">
         <div data-bind="template: { name: TypeName }" class="row step">

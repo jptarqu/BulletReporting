@@ -115,7 +115,14 @@ module IDE.Functions {
             ko.applyBindings(this);
             console.log(this.SaveDataToJSON());
         }
-
+        CreateNewFilterFunction(dataset_step_name: string): void {
+            var new_func: Functions.FilterFunction = Factory.Factories["IDE.Functions.FilterFunction"]();
+            var num_funcs = this.FilterFunctions.length;
+            new_func.FunctionName("NewFilter" + (num_funcs + 1));
+            //Add below eacxh of fields that currenlty belong to dataset_step_name
+            new_func.DatasetContract.push(new datsetc
+            this.FilterFunctions.push(new_func);
+        }
         CreateFilterTest(): void {
 
             var load_table = new Steps.TableLoadStep();
@@ -154,7 +161,7 @@ module IDE.Functions {
             new_comp.Operator(">");
             new_comp.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("Dataset.Tran Amount")); //Dataset is the name of the dataset param sent to the filter function
             new_comp.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("Offset"));
-            new_func.AddStep(new_comp);
+            //new_func.AddStep(new_comp);
 
             this.ChildFunctions.push(new_func);
 
