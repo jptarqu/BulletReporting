@@ -1,15 +1,24 @@
 ﻿
 <script id="IDE.Steps.CallFilterFunctionStep" type="text/html">
     <div class="call-filter-function-step exp">
-        <div class="db-table-name col-md-2" data-bind="text: FunctionName">
-        </div>
+
         <div class="db-table-name col-md-2" data-bind="text: DatasetName">
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="reference-single-value btn btn-primary"
+                    data-bind="click: function () {
+    $parents[0].ShowAvailableDatasetNames($data) } ">
+                Select Dataset
+            </button>
+
+        </div>
+
+        <div class="db-table-name col-md-2" data-bind="text: FunctionName">
         </div>
 
         <div class="col-md-2">
             <button type="button" class="reference-single-value btn btn-primary"
-                    data-bind="click: function () { $parents[0].CreateNewFilterFunction() },
-    css: { 'btn-warning': IsSelected } ">
+                    data-bind="click: function () { $parents[0].CreateNewFilterFunction($data.DatasetName()) }    ">
                 Create New
             </button><!-- CALLS the dialog from the parent function or code block-->
         </div>

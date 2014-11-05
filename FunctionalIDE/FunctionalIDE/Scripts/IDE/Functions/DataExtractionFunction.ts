@@ -13,9 +13,10 @@ module IDE.Functions {
         CurrStepIdx = 0; 
 
         AddStep(step_type: string) {
-            var new_step = Factory.Factories[step_type]();
+            var new_step:Steps.DatasetValueStep = Factory.Factories[step_type]();
             this.UserSteps.splice(this.CurrStepIdx, 0,new_step);
             this.CurrStepIdx++;
+            new_step.StepName(new_step.StepName() + this.CurrStepIdx);
         }
 
         Test(): void {
@@ -115,63 +116,68 @@ module IDE.Functions {
             ko.applyBindings(this);
             console.log(this.SaveDataToJSON());
         }
+
         CreateNewFilterFunction(dataset_step_name: string): void {
             var new_func: Functions.FilterFunction = Factory.Factories["IDE.Functions.FilterFunction"]();
             var num_funcs = this.FilterFunctions.length;
             new_func.FunctionName("NewFilter" + (num_funcs + 1));
             //Add below eacxh of fields that currenlty belong to dataset_step_name
-            new_func.DatasetContract.push(new datsetc
+            //new_func.DatasetContract.push(new datsetc
+            var field_names = this.GetDatasetFieldNames(dataset_step_name);
+            var contract = new IDE.Contracts.DatasetContract(field_names);
+            new_func.DatasetContract(contract);
             this.FilterFunctions.push(new_func);
         }
+
         CreateFilterTest(): void {
 
-            var load_table = new Steps.TableLoadStep();
-            load_table.StepName("Step 1");
-            load_table.Name("Transactions");
-            load_table.FieldNames(["Account Number", "Tran Amount"]);
+            //var load_table = new Steps.TableLoadStep();
+            //load_table.StepName("Step 1");
+            //load_table.Name("Transactions");
+            //load_table.FieldNames(["Account Number", "Tran Amount"]);
 
-            //define (not call) the filter function
-            var new_func = new Functions.FunctionFromDataset();
-            new_func.FunctionName("GetAboveOffset");
-            var new_contract = new Contracts.DatasetContract();
-            new_contract.FieldsRequired.push("Account Number");
-            new_contract.FieldsRequired.push("Tran Amount");
-            new_func.DatasetContract(new_contract);
+            ////define (not call) the filter function
+            //var new_func = new Functions.FunctionFromDataset();
+            //new_func.FunctionName("GetAboveOffset");
+            //var new_contract = new Contracts.DatasetContract();
+            //new_contract.FieldsRequired.push("Account Number");
+            //new_contract.FieldsRequired.push("Tran Amount");
+            //new_func.DatasetContract(new_contract);
 
-            var new_step: Steps.NumberStep = null;
-            new_step = new Steps.NumberStep();
-            new_step.StepName("tax");
-            new_step.Value(5);
-            new_func.UserSteps.push(new_step);
+            //var new_step: Steps.NumberStep = null;
+            //new_step = new Steps.NumberStep();
+            //new_step.StepName("tax");
+            //new_step.Value(5);
+            //new_func.UserSteps.push(new_step);
 
-            new_step = new Steps.NumberStep();
-            new_step.StepName("penalty");
-            new_step.Value(6);
-            new_func.UserSteps.push(new_step);
+            //new_step = new Steps.NumberStep();
+            //new_step.StepName("penalty");
+            //new_step.Value(6);
+            //new_func.UserSteps.push(new_step);
 
-            var new_op = new Steps.OperatorStep();
-            new_op.StepName("MyOffset");
-            new_op.Operator("+");
-            new_op.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("tax"));
-            new_op.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("penalty"));
-            new_func.UserSteps.push(new_op);
+            //var new_op = new Steps.OperatorStep();
+            //new_op.StepName("MyOffset");
+            //new_op.Operator("+");
+            //new_op.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("tax"));
+            //new_op.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("penalty"));
+            //new_func.UserSteps.push(new_op);
             
-            //add the comparison to the filter function's body
-            var new_comp = new Steps.OperatorStep();
-            new_comp.Operator(">");
-            new_comp.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("Dataset.Tran Amount")); //Dataset is the name of the dataset param sent to the filter function
-            new_comp.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("Offset"));
-            //new_func.AddStep(new_comp);
+            ////add the comparison to the filter function's body
+            //var new_comp = new Steps.OperatorStep();
+            //new_comp.Operator(">");
+            //new_comp.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("Dataset.Tran Amount")); //Dataset is the name of the dataset param sent to the filter function
+            //new_comp.OperandVarNames.push(new IDE.Expressions.StepReferenceSingleValue("Offset"));
+            ////new_func.AddStep(new_comp);
 
-            this.ChildFunctions.push(new_func);
+            //this.ChildFunctions.push(new_func);
 
-            //Add ther step that calls the filter function
-            var call_filter_step = new Steps.CallFilterFunctionStep();
-            this.UserSteps.push(call_filter_step); //important to add it to the steps first
-            call_filter_step.DatasetName("Step 1");
-            call_filter_step.FieldNames(this.GetDatasetFieldNames(call_filter_step, call_filter_step.DatasetName()));
-            call_filter_step.FunctionName(new_func.FunctionName());
-            call_filter_step.ParamNames(["MyOffset"]);
+            ////Add ther step that calls the filter function
+            //var call_filter_step = new Steps.CallFilterFunctionStep();
+            //this.UserSteps.push(call_filter_step); //important to add it to the steps first
+            //call_filter_step.DatasetName("Step 1");
+            //call_filter_step.FieldNames(this.GetDatasetFieldNames(call_filter_step, call_filter_step.DatasetName()));
+            //call_filter_step.FunctionName(new_func.FunctionName());
+            //call_filter_step.ParamNames(["MyOffset"]);
 
 
 		}
@@ -218,6 +224,31 @@ module IDE.Functions {
                     calling_step.SetReference(chosen_item, field_names);
                 }
                 , null
+                );
+        }
+
+        ShowAvailableDatasetNames(calling_step: IDE.Steps.CallFuncFromSetStep): void {
+            var dataset_names = this.GetDatasetNames(calling_step);
+            this.ReferenceDialog.Display(
+                (keyword: string) => {
+                    if (keyword == "") {
+                        return dataset_names;
+                    }
+                    else {
+                        return dataset_names.filter(
+                            (element: string) => element.indexOf(keyword) >= 0
+                            )
+
+                    }
+                }
+                ,
+                (keyword: string) => ""
+                , (chosen_item: string) => {
+                    calling_step.DatasetName(chosen_item);
+                }
+                , () => {
+                    calling_step.DatasetName("");
+                }
                 );
         }
 
@@ -293,29 +324,35 @@ module IDE.Functions {
             return field_names;
         }
 
-        //We will opass this function to the child steps so that they can call it to request the names of fields of steps before them
-        GetDatasetFieldNames(calling_step: IDE.Steps.IStep, dataset_name: string): Array<string> {
-            //find the calling step
+        GetDatasetFieldNames(dataset_name: string): Array<string> {
             var steps = this.UserSteps();  
-            var field_names: Array<string> = null;
+            var field_names: Array<string> = [];
 
             for (var step_idx = 0; step_idx < steps.length; step_idx++) {
-                if (steps[step_idx] == calling_step) {
-                    //reached the callinmg step, shoud not go futher into future steps
-                    break;
-                }
+               
                 if (steps[step_idx].StepName() == dataset_name) {
                     field_names = (<Steps.IDatasetValueStep> steps[step_idx]).FieldNames();
                 }
             }
             return field_names;
         }
+        GetDatasetNames(calling_step: IDE.Steps.IStep): Array<string> {
+            //find the calling step
+            var steps = this.UserSteps();
+            var dataset_names: Array<string> = [];
 
-
-        CreateFunctionFromDataset(step: Steps.CallFuncFromSetStep): void {
-            var fields_required = this.GetDatasetFieldNames(step, step.DatasetName());
-            var new_func = Factory.CreateFunctionFromDataset(fields_required);
-            step.FunctionName(new_func.FunctionName() );
+            for (var step_idx = 0; step_idx < steps.length; step_idx++) {
+                if (steps[step_idx] == calling_step) {
+                    //reached the callinmg step, shoud not go futher into future steps
+                    break;
+                }
+                if (steps[step_idx]["FieldNames"] !== undefined) {
+                    dataset_names.push((<Steps.IDatasetValueStep> steps[step_idx]).StepName());
+                }
+            }
+            return dataset_names;
         }
+
+
     }
 } 

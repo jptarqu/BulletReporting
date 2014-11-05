@@ -17,6 +17,7 @@
 <script src="~/Scripts/IDE/Expressions/TextExpression.js"></script>
 <script src="~/Scripts/IDE/Functions/IFunction.js"></script>
 <script src="~/Scripts/IDE/Functions/FunctionFromDataset.js"></script>
+<script src="~/Scripts/IDE/Functions/FilterFunction.js"></script>
 <script src="~/Scripts/IDE/Functions/DataExtractionFunction.js"></script>
 <script src="~/Scripts/IDE/Params/IParam.js"></script>
 <script src="~/Scripts/IDE/Params/DataSetParam.js"></script>
@@ -69,14 +70,21 @@
     </button>
 
     <div data-bind="foreach: UserSteps">
-        <div data-bind="template: { name: TypeName }" class="row step">
+        <div class="row step">
+
+            <div class="col-sm-1" data-bind="text: StepName">
+
+            </div>
+            <div data-bind="template: { name: TypeName }" class="col-sm-5">
+            </div>
         </div>
     </div>
 
     <div class="filters-container">
         <h3>Filter Functions</h3>
-        
+
         <div data-bind="foreach: FilterFunctions">
+
             <div data-bind="template: { name: TypeName }" class="filter-container">
 
             </div>

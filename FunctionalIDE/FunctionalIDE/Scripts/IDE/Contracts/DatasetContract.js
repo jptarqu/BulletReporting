@@ -3,8 +3,9 @@ var IDE;
 (function (IDE) {
     (function (Contracts) {
         var DatasetContract = (function () {
-            function DatasetContract() {
+            function DatasetContract(names) {
                 this.FieldsRequired = ko.observableArray();
+                this.FieldsRequired(names);
             }
             DatasetContract.prototype.LoadDataFromJSON = function (source) {
                 // a utility that copies properties into this instance

@@ -5,7 +5,7 @@ module IDE {
     export interface IScope {
         UserSteps: KnockoutObservableArray<IDE.Steps.IStep>;
 
-        GetDatasetFieldNames(calling_step: IDE.Steps.IStep, dataset_name: string): Array<string>;
+        //GetDatasetFieldNames(calling_step: IDE.Steps.IStep, dataset_name: string): Array<string>;
     
     }
 }  

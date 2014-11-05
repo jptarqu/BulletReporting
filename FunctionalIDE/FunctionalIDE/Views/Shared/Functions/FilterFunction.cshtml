@@ -13,7 +13,13 @@
     </button>
 
     <div data-bind="foreach: UserSteps">
-        <div data-bind="template: { name: TypeName }" class="row step">
+        <div class="row step">
+
+            <div class="col-sm-1" data-bind="text: StepName">
+
+            </div>
+            <div data-bind="template: { name: TypeName }" class="col-sm-5">
+            </div>
         </div>
     </div>
 
