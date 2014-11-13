@@ -31,7 +31,7 @@ module IDE.Dialogs {
             this.OnDeleteFunction = del_func;
             this.IsVisible(true);
             this.PerformSearch(); //default search
-            this.HtmlElem.modal();
+            this.HtmlElem.modal('show');
         }
 
         PerformSearch(): void {
@@ -41,6 +41,7 @@ module IDE.Dialogs {
         ChooseResult(): void {
             this.OnSelectFunction(this.SelectedEntry());
             this.IsVisible(false);
+            this.HtmlElem.modal('hide');
         }
         DeleteReference(): void {
             this.OnDeleteFunction();

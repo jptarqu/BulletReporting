@@ -7,4 +7,8 @@
 .table-load-step {
   border-left: thick solid #ff0000;
 }
+.db-field-name {
+  border: 1px solid black;
+  padding: 3px;
+}
 /*# sourceMappingURL=IDE.css.map */

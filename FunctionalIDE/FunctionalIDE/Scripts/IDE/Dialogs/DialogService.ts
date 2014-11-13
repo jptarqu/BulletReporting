@@ -6,7 +6,8 @@ module IDE.Dialogs {
         public static SetDialogElement(): void {
             var div_dialog : any = $("#ReferenceDialog");
             div_dialog.modal({
-                keyboard: false
+                keyboard: false,
+                show: false
             });
 
             this.Dialog.HtmlElem = div_dialog;
