@@ -2,6 +2,7 @@
 
 module IDE.Dialogs {
     export class ReferenceDialog  {
+
         TypeName = "IDE.Dialogs.ReferenceDialog";
 
         OnSelectFunction: OnSelectCallback; //passed by callers to allow returning chosen item
@@ -15,6 +16,10 @@ module IDE.Dialogs {
         Help = ko.observable<string>("");
         IsVisible = ko.observable<boolean>(true);
 
+        HtmlElem  = null;
+        constructor() {
+        }
+
         Display(search_func: SearchCallback, help_func: HelpCallback,
             chosen_func: OnSelectCallback,
             del_func: OnDeleteCallback
@@ -26,6 +31,7 @@ module IDE.Dialogs {
             this.OnDeleteFunction = del_func;
             this.IsVisible(true);
             this.PerformSearch(); //default search
+            this.HtmlElem.modal();
         }
 
         PerformSearch(): void {

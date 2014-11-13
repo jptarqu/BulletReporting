@@ -9,7 +9,7 @@ var IDE;
                 this.FunctionName = ko.observable("");
                 this.FunctionParams = ko.observableArray();
                 this.UserSteps = ko.observableArray();
-                this.ReferenceDialog = new IDE.Dialogs.ReferenceDialog();
+                this.ReferenceDialog = IDE.Dialogs.DialogService.Dialog;
                 this.CurrStepIdx = 0;
             }
             FunctionFromDataset.prototype.AddStep = function (step_type) {

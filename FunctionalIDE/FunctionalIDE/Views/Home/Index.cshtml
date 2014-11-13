@@ -42,7 +42,7 @@
 <script src="~/Scripts/IDE/Dialogs/HelpCallback.js"></script>
 <script src="~/Scripts/IDE/Dialogs/ReferenceDialog.js"></script>
 <script src="~/Scripts/IDE/Dialogs/SearchCallback.js"></script>
-
+<script src="~/Scripts/IDE/Dialogs/DialogService.js"></script>
 <!-- Templates -->
 @Html.Partial("~/Views/Shared/Expressions/StepReferenceSingleValue.cshtml")
 @Html.Partial("~/Views/Shared/Steps/CallFilterFunctionStep.cshtml")
@@ -72,13 +72,16 @@
     <div data-bind="foreach: UserSteps">
         <div class="row step">
 
-            <div class="col-sm-1" data-bind="text: StepName">
+            <div class="col-sm-1" >
+
+                <input type="text" data-bind=" value: StepName">
 
             </div>
             <div data-bind="template: { name: TypeName }" class="col-sm-5">
             </div>
         </div>
     </div>
+    @Html.Partial("~/Views/Shared/Dialogs/ReferenceDialog.cshtml")
 
     <div class="filters-container">
         <h3>Filter Functions</h3>
@@ -91,7 +94,6 @@
         </div>
     </div>
 </div>
-@Html.Partial("~/Views/Shared/Dialogs/ReferenceDialog.cshtml")
 <script>
 
     $(function () {

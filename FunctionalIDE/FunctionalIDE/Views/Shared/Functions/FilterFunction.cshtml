@@ -15,31 +15,16 @@
     <div data-bind="foreach: UserSteps">
         <div class="row step">
 
-            <div class="col-sm-1" data-bind="text: StepName">
+            <div class="col-sm-1" >
 
+                <input type="text" data-bind=" value: StepName">
             </div>
             <div data-bind="template: { name: TypeName }" class="col-sm-5">
             </div>
         </div>
     </div>
-
-    <div class="reference-dialog" data-bind="with: ReferenceDialog">
-        <input type="text" name="KeywordSearch" data-bind="value: SearchEntry" />
-        <button data-bind="click: PerformSearch">Search</button>
-        <br />
-
-        <select data-bind="options: SearchResults, value: SelectedEntry" size="7"></select>
-        <br />
-        <div class="reference-dialog-help" data-bind="html: Help">
-
-        </div>
-
-        <button data-bind="click: ChooseResult">Select</button>
-        <hr />
-
-        <button data-bind="click: DeleteReference">Delete</button>
-
-    </div>
+    
+   
 </script>
 <script id="IDE.Steps.TableLoadStepDisplay" type="text/html">
 </script>

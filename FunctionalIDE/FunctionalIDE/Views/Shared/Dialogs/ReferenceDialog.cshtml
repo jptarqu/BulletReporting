@@ -1,21 +1,50 @@
 ﻿
-<div id="ReferenceDialogPlaceholder">
+<div id="ReferenceDialogPlaceholder" data-bind="with: ReferenceDialog">
+    <div class="modal fade" id="ReferenceDialog" tabindex="-1" role="dialog"
+         aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&amp;times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Select Reference</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="reference-dialog">
+                        <input type="text" name="KeywordSearch" data-bind="value: SearchEntry" />
+                        <button data-bind="click: PerformSearch">Search</button>
+                        <br />
 
-    <div class="reference-dialog" data-bind="with: ReferenceDialog">
-        <input type="text" name="KeywordSearch" data-bind="value: SearchEntry" />
-        <button data-bind="click: PerformSearch">Search</button>
-        <br />
+                        <select data-bind="options: SearchResults, value: SelectedEntry" size="7"></select>
+                        <br />
+                        <div class="reference-dialog-help" data-bind="html: Help">
 
-        <select data-bind="options: SearchResults, value: SelectedEntry" size="7"></select>
-        <br />
-        <div class="reference-dialog-help" data-bind="html: Help">
+                        </div>
 
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-bind="click: DeleteReference" class="btn btn-default" data-dismiss="modal">ChooseResult</button>
+                    <button type="button" data-bind="click: ChooseResult" class="btn btn-primary">Select</button>
+                </div>
+            </div>
         </div>
-
-        <button data-bind="click: ChooseResult">Select</button>
-        <hr />
-
-        <button data-bind="click: DeleteReference">Delete</button>
-        
     </div>
+    @*<div class="reference-dialog" data-bind="with: ReferenceDialog">
+            <input type="text" name="KeywordSearch" data-bind="value: SearchEntry" />
+            <button data-bind="click: PerformSearch">Search</button>
+            <br />
+
+            <select data-bind="options: SearchResults, value: SelectedEntry" size="7"></select>
+            <br />
+            <div class="reference-dialog-help" data-bind="html: Help">
+
+            </div>
+
+            <button data-bind="click: ChooseResult">Select</button>
+            <hr />
+
+            <button data-bind="click: DeleteReference">Delete</button>
+
+        </div>*@
 </div>

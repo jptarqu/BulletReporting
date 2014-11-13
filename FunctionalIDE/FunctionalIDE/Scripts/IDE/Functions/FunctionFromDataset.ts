@@ -8,7 +8,7 @@ module IDE.Functions {
         FunctionParams = ko.observableArray<IDE.Params.Param>();
         UserSteps = ko.observableArray<IDE.Steps.ISingleValueStep>(); //UserVarSteps can only be static values or operators or function calls
 
-        ReferenceDialog = new IDE.Dialogs.ReferenceDialog();
+        ReferenceDialog = IDE.Dialogs.DialogService.Dialog;
         CurrStepIdx = 0; 
 
         AddStep(step_type: string) {

@@ -194,6 +194,7 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\IDE\Dialogs\DialogService.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Dialogs\OnDeleteCallback.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Dialogs\OnSelectCallback.ts" />
     <TypeScriptCompile Include="Scripts\IDE\Expressions\StepReferenceSingleValue.ts" />

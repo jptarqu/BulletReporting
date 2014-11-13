@@ -9,7 +9,7 @@ module IDE.Functions {
 
         UserSteps = ko.observableArray<Steps.DatasetValueStep>(); //only DatasetValueStep and static value steps can be used from DataExtractionFunctions
         AvailableSingleValueStepNames = ko.observableArray<string>();
-        ReferenceDialog = new IDE.Dialogs.ReferenceDialog();
+        ReferenceDialog = IDE.Dialogs.DialogService.Dialog;
         CurrStepIdx = 0; 
 
         AddStep(step_type: string) {
@@ -113,8 +113,9 @@ module IDE.Functions {
             //    testdata
             //    );
             //this.CreateFilterTest();
+            Dialogs.DialogService.SetDialogElement();
             ko.applyBindings(this);
-            console.log(this.SaveDataToJSON());
+            //console.log(this.SaveDataToJSON());
         }
 
         CreateNewFilterFunction(dataset_step_name: string): void {
